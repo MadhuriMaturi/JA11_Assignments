@@ -1,0 +1,5126 @@
+mysql> use madhuri
+Database changed
+mysql> show tables;
+Empty set (0.00 sec)
+
+mysql> use madhuri;
+Database changed
+mysql> show tables;
++-------------------+
+| Tables_in_madhuri |
++-------------------+
+| madhu             |
+| raju              |
++-------------------+
+2 rows in set (0.00 sec)
+
+mysql> desc madhu
+    -> \c
+mysql> desc madhu;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| sid   | int         | NO   | PRI | NULL    |       |
+| sname | varchar(45) | YES  |     | NULL    |       |
+| marks | int         | YES  |     | NULL    |       |
+| doj   | date        | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> desc raju;
++--------+---------------+------+-----+---------+-------+
+| Field  | Type          | Null | Key | Default | Extra |
++--------+---------------+------+-----+---------+-------+
+| eid    | int           | NO   | PRI | NULL    |       |
+| ename  | varchar(45)   | YES  |     | NULL    |       |
+| salary | decimal(10,0) | YES  |     | NULL    |       |
+| doj    | date          | YES  |     | NULL    |       |
++--------+---------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> insert into madhu values(21,'ram',530,'2023-07-12');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> desc madhu;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| sid   | int         | NO   | PRI | NULL    |       |
+| sname | varchar(45) | YES  |     | NULL    |       |
+| marks | int         | YES  |     | NULL    |       |
+| doj   | date        | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> select * from madhu;
++-----+-------+-------+------------+
+| sid | sname | marks | doj        |
++-----+-------+-------+------------+
+|  21 | ram   |   530 | 2023-07-12 |
++-----+-------+-------+------------+
+1 row in set (0.00 sec)
+
+mysql> insert into madhu values(22,'mani',530,'2023-87-52');
+ERROR 1292 (22007): Incorrect date value: '2023-87-52' for column 'doj' at row 1
+mysql> insert into madhu values(22,'mani',530,'2023-07-2');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into madhu values(23,'nani',560,'2023-03-23');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into madhu values(24,'sam',580,'2022-04-23');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into madhu values(25,'sanju',520,'2023-02-3');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> select * from madhu;
++-----+-------+-------+------------+
+| sid | sname | marks | doj        |
++-----+-------+-------+------------+
+|  21 | ram   |   530 | 2023-07-12 |
+|  22 | mani  |   530 | 2023-07-02 |
+|  23 | nani  |   560 | 2023-03-23 |
+|  24 | sam   |   580 | 2022-04-23 |
+|  25 | sanju |   520 | 2023-02-03 |
++-----+-------+-------+------------+
+5 rows in set (0.00 sec)
+
+mysql> desc raju;
++--------+---------------+------+-----+---------+-------+
+| Field  | Type          | Null | Key | Default | Extra |
++--------+---------------+------+-----+---------+-------+
+| eid    | int           | NO   | PRI | NULL    |       |
+| ename  | varchar(45)   | YES  |     | NULL    |       |
+| salary | decimal(10,0) | YES  |     | NULL    |       |
+| doj    | date          | YES  |     | NULL    |       |
++--------+---------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> alter table madhu modify ename varchar(50);
+ERROR 1054 (42S22): Unknown column 'ename' in 'madhu'
+mysql> alter table madhu modify sname varchar(50);
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc madhu;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| sid   | int         | NO   | PRI | NULL    |       |
+| sname | varchar(50) | YES  |     | NULL    |       |
+| marks | int         | YES  |     | NULL    |       |
+| doj   | date        | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> alter table madhu modify add(city(varchar(45));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'add(city(varchar(45))' at line 1
+mysql> alter table madhu  add(city(varchar(45));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(varchar(45))' at line 1
+mysql> alter table madhu  add(city Varchar(45));
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table raju column eid;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'column eid' at line 1
+mysql> alter table raju  drop column eid;
+Query OK, 0 rows affected (0.04 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table raju  add(eid int);
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> update madhu set sid=22 where marks=590;
+Query OK, 0 rows affected (0.00 sec)
+Rows matched: 0  Changed: 0  Warnings: 0
+
+mysql> select * from madhu;
++-----+-------+-------+------------+------+
+| sid | sname | marks | doj        | city |
++-----+-------+-------+------------+------+
+|  21 | ram   |   530 | 2023-07-12 | NULL |
+|  22 | mani  |   530 | 2023-07-02 | NULL |
+|  23 | nani  |   560 | 2023-03-23 | NULL |
+|  24 | sam   |   580 | 2022-04-23 | NULL |
+|  25 | sanju |   520 | 2023-02-03 | NULL |
++-----+-------+-------+------------+------+
+5 rows in set (0.00 sec)
+
+mysql> update madhu set marks=590  where sid=22;
+Query OK, 1 row affected (0.03 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from madhu;
++-----+-------+-------+------------+------+
+| sid | sname | marks | doj        | city |
++-----+-------+-------+------------+------+
+|  21 | ram   |   530 | 2023-07-12 | NULL |
+|  22 | mani  |   590 | 2023-07-02 | NULL |
+|  23 | nani  |   560 | 2023-03-23 | NULL |
+|  24 | sam   |   580 | 2022-04-23 | NULL |
+|  25 | sanju |   520 | 2023-02-03 | NULL |
++-----+-------+-------+------------+------+
+5 rows in set (0.00 sec)
+
+mysql> select sid,sname from madhu where sid>23;
++-----+-------+
+| sid | sname |
++-----+-------+
+|  24 | sam   |
+|  25 | sanju |
++-----+-------+
+2 rows in set (0.00 sec)
+
+mysql> select * from madhu where marks between 530 and 580;
++-----+-------+-------+------------+------+
+| sid | sname | marks | doj        | city |
++-----+-------+-------+------------+------+
+|  21 | ram   |   530 | 2023-07-12 | NULL |
+|  23 | nani  |   560 | 2023-03-23 | NULL |
+|  24 | sam   |   580 | 2022-04-23 | NULL |
++-----+-------+-------+------------+------+
+3 rows in set (0.00 sec)
+
+mysql> select * from madhu where sname like 's%';
++-----+-------+-------+------------+------+
+| sid | sname | marks | doj        | city |
++-----+-------+-------+------------+------+
+|  24 | sam   |   580 | 2022-04-23 | NULL |
+|  25 | sanju |   520 | 2023-02-03 | NULL |
++-----+-------+-------+------------+------+
+2 rows in set (0.00 sec)
+
+mysql> select * from madhu where sname like '%m';
++-----+-------+-------+------------+------+
+| sid | sname | marks | doj        | city |
++-----+-------+-------+------------+------+
+|  21 | ram   |   530 | 2023-07-12 | NULL |
+|  24 | sam   |   580 | 2022-04-23 | NULL |
++-----+-------+-------+------------+------+
+2 rows in set (0.00 sec)
+
+mysql> select sum(marks) from madhu;
++------------+
+| sum(marks) |
++------------+
+|       2780 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select max(marks) from madhu;
++------------+
+| max(marks) |
++------------+
+|        590 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select min(marks) from madhu;
++------------+
+| min(marks) |
++------------+
+|        520 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select min(doj) from madhu;
++------------+
+| min(doj)   |
++------------+
+| 2022-04-23 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> update madhu set city='hyd' where sid>23;
+Query OK, 2 rows affected (0.01 sec)
+Rows matched: 2  Changed: 2  Warnings: 0
+
+mysql> select * from madhu;
++-----+-------+-------+------------+------+
+| sid | sname | marks | doj        | city |
++-----+-------+-------+------------+------+
+|  21 | ram   |   530 | 2023-07-12 | NULL |
+|  22 | mani  |   590 | 2023-07-02 | NULL |
+|  23 | nani  |   560 | 2023-03-23 | NULL |
+|  24 | sam   |   580 | 2022-04-23 | hyd  |
+|  25 | sanju |   520 | 2023-02-03 | hyd  |
++-----+-------+-------+------------+------+
+5 rows in set (0.00 sec)
+
+mysql> update madhu set city='bng' where sid>22;
+Query OK, 3 rows affected (0.03 sec)
+Rows matched: 3  Changed: 3  Warnings: 0
+
+mysql> update madhu set city='hyd' where sid=22;
+Query OK, 1 row affected (0.03 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from madhu;
++-----+-------+-------+------------+------+
+| sid | sname | marks | doj        | city |
++-----+-------+-------+------------+------+
+|  21 | ram   |   530 | 2023-07-12 | NULL |
+|  22 | mani  |   590 | 2023-07-02 | hyd  |
+|  23 | nani  |   560 | 2023-03-23 | bng  |
+|  24 | sam   |   580 | 2022-04-23 | bng  |
+|  25 | sanju |   520 | 2023-02-03 | bng  |
++-----+-------+-------+------------+------+
+5 rows in set (0.00 sec)
+
+mysql> update madhu set city='hyd' where sid=21;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update madhu set city='elr'where sid=23;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from madhu;
++-----+-------+-------+------------+------+
+| sid | sname | marks | doj        | city |
++-----+-------+-------+------------+------+
+|  21 | ram   |   530 | 2023-07-12 | hyd  |
+|  22 | mani  |   590 | 2023-07-02 | hyd  |
+|  23 | nani  |   560 | 2023-03-23 | elr  |
+|  24 | sam   |   580 | 2022-04-23 | bng  |
+|  25 | sanju |   520 | 2023-02-03 | bng  |
++-----+-------+-------+------------+------+
+5 rows in set (0.00 sec)
+
+mysql> select sname,sum(marks) group by city;
+ERROR 1054 (42S22): Unknown column 'sname' in 'field list'
+mysql> select sname,sum(marks) from madhu group by city;
++-------+------------+
+| sname | sum(marks) |
++-------+------------+
+| ram   |       1120 |
+| nani  |        560 |
+| sam   |       1100 |
++-------+------------+
+3 rows in set (0.01 sec)
+
+mysql> select city,sum(marks) from madhu group by city;
++------+------------+
+| city | sum(marks) |
++------+------------+
+| hyd  |       1120 |
+| elr  |        560 |
+| bng  |       1100 |
++------+------------+
+3 rows in set (0.00 sec)
+
+mysql> select city,sum(marks) from madhu group by city having eid>23 order by city;
+ERROR 1054 (42S22): Unknown column 'eid' in 'having clause'
+mysql> select city,sum(marks) from madhu group by city having sid>23 order by city;
+ERROR 1054 (42S22): Unknown column 'sid' in 'having clause'
+mysql> select city,sum(marks) from madhu group by city having sid>23;
+ERROR 1054 (42S22): Unknown column 'sid' in 'having clause'
+mysql> select city,sum(marks) from madhu group by city having sid=23;
+ERROR 1054 (42S22): Unknown column 'sid' in 'having clause'
+mysql> select city,sum(marks) from madhu group by city order by city;
++------+------------+
+| city | sum(marks) |
++------+------------+
+| bng  |       1100 |
+| elr  |        560 |
+| hyd  |       1120 |
++------+------------+
+3 rows in set (0.00 sec)
+
+mysql> select * from raju;
+Empty set (0.00 sec)
+
+mysql> desc raju;
++--------+---------------+------+-----+---------+-------+
+| Field  | Type          | Null | Key | Default | Extra |
++--------+---------------+------+-----+---------+-------+
+| ename  | varchar(45)   | YES  |     | NULL    |       |
+| salary | decimal(10,0) | YES  |     | NULL    |       |
+| doj    | date          | YES  |     | NULL    |       |
+| eid    | int           | YES  |     | NULL    |       |
++--------+---------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> drop column eid from raju;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'column eid from raju' at line 1
+mysql> delete column coulmn="eid" from raju;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'column coulmn="eid" from raju' at line 1
+mysql> delete column coulmn="eid" from raju;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'column coulmn="eid" from raju' at line 1
+mysql> ^C
+mysql> \c
+mysql> CREATE TABLE Books
+    -> (
+    -> Id INT PRIMARY KEY IDENTITY(1,1),
+    -> Name VARCHAR (50) NOT NULL,
+    -> Price INT,
+    -> CategoryId INT,
+    -> AuthorId INT
+    -> )
+    -> \c
+mysql> CREATE TABLE Books
+    -> (
+    -> Id INT PRIMARY KEY IDENTITY(1,1),
+    -> Name VARCHAR (50) NOT NULL,
+    -> Price INT,
+    -> CategoryId INT,
+    -> AuthorId INT
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'IDENTITY(1,1),
+Name VARCHAR (50) NOT NULL,
+Price INT,
+CategoryId INT,
+AuthorId ' at line 3
+mysql> CREATE TABLE Books
+    -> (
+    -> Id INT PRIMARY KEY IDENTITY(1,1),
+    -> Name VARCHAR (50) NOT NULL,
+    -> Price INT,
+    -> CategoryId INT,
+    -> AuthorId INT
+    -> Id INT PRIMARY KEY IDENTITY(1,1),\
+    -> \c
+mysql> CREATE TABLE Books
+    -> (
+    -> Id INT PRIMARY KEY IDENTITY(1,1),
+    -> Name VARCHAR (50) NOT NULL,
+    -> Price INT,
+    -> CategoryId INT,
+    -> AuthorId INT
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'IDENTITY(1,1),
+Name VARCHAR (50) NOT NULL,
+Price INT,
+CategoryId INT,
+AuthorId ' at line 3
+mysql> use employee_db;
+Database changed
+mysql> select * from employee;
++-----+--------+--------+------+-----------+------------+------+------+
+| eid | ename  | salary | comm | job       | doj        | mid  | dno  |
++-----+--------+--------+------+-----------+------------+------+------+
+| 101 | king   |  50000 | NULL | president | 2020-10-21 | NULL |   30 |
+| 102 | sam    |  35000 | NULL | manager   | 2020-12-21 |  101 |   10 |
+| 103 | ford   |  32000 | NULL | manager   | 2020-11-01 |  101 |   20 |
+| 104 | tom    |  28000 |  900 | developer | 2021-06-29 |  102 |   10 |
+| 105 | adam   |  27000 | 1000 | developer | 2021-09-23 |  102 |   10 |
+| 106 | jerry  |  25000 | 3000 | tester    | 2021-05-15 |  103 |   20 |
+| 107 | scott  |  24000 | 3000 | tester    | 2021-05-15 |  103 |   20 |
+| 108 | raju   |  12000 |  500 | clerk     | 2023-10-19 |  101 |   40 |
+| 109 | javeed |  29000 | NULL | NULL      | NULL       | NULL | NULL |
++-----+--------+--------+------+-----------+------------+------+------+
+9 rows in set (0.00 sec)
+
+mysql> select * from dept;
++-----+-------------+-----------+
+| dno | dname       | location  |
++-----+-------------+-----------+
+|  10 | development | banglore  |
+|  20 | testing     | chennai   |
+|  30 | operation   | mumbai    |
+|  40 | marketing   | hyderabad |
+|  50 | sales       | pune      |
++-----+-------------+-----------+
+5 rows in set (0.00 sec)
+
+mysql> select eid,ename,salary,d.dno,dname,location from employee e,dept d where e.dno=d.dno;
++-----+-------+--------+-----+-------------+-----------+
+| eid | ename | salary | dno | dname       | location  |
++-----+-------+--------+-----+-------------+-----------+
+| 101 | king  |  50000 |  30 | operation   | mumbai    |
+| 102 | sam   |  35000 |  10 | development | banglore  |
+| 103 | ford  |  32000 |  20 | testing     | chennai   |
+| 104 | tom   |  28000 |  10 | development | banglore  |
+| 105 | adam  |  27000 |  10 | development | banglore  |
+| 106 | jerry |  25000 |  20 | testing     | chennai   |
+| 107 | scott |  24000 |  20 | testing     | chennai   |
+| 108 | raju  |  12000 |  40 | marketing   | hyderabad |
++-----+-------+--------+-----+-------------+-----------+
+8 rows in set (0.00 sec)
+
+mysql> select eid,ename,salary,d.dno,dname,location from employee e,dept d where e.dno!=d.dno;
++-----+-------+--------+-----+-------------+-----------+
+| eid | ename | salary | dno | dname       | location  |
++-----+-------+--------+-----+-------------+-----------+
+| 101 | king  |  50000 |  50 | sales       | pune      |
+| 101 | king  |  50000 |  40 | marketing   | hyderabad |
+| 101 | king  |  50000 |  20 | testing     | chennai   |
+| 101 | king  |  50000 |  10 | development | banglore  |
+| 102 | sam   |  35000 |  50 | sales       | pune      |
+| 102 | sam   |  35000 |  40 | marketing   | hyderabad |
+| 102 | sam   |  35000 |  30 | operation   | mumbai    |
+| 102 | sam   |  35000 |  20 | testing     | chennai   |
+| 103 | ford  |  32000 |  50 | sales       | pune      |
+| 103 | ford  |  32000 |  40 | marketing   | hyderabad |
+| 103 | ford  |  32000 |  30 | operation   | mumbai    |
+| 103 | ford  |  32000 |  10 | development | banglore  |
+| 104 | tom   |  28000 |  50 | sales       | pune      |
+| 104 | tom   |  28000 |  40 | marketing   | hyderabad |
+| 104 | tom   |  28000 |  30 | operation   | mumbai    |
+| 104 | tom   |  28000 |  20 | testing     | chennai   |
+| 105 | adam  |  27000 |  50 | sales       | pune      |
+| 105 | adam  |  27000 |  40 | marketing   | hyderabad |
+| 105 | adam  |  27000 |  30 | operation   | mumbai    |
+| 105 | adam  |  27000 |  20 | testing     | chennai   |
+| 106 | jerry |  25000 |  50 | sales       | pune      |
+| 106 | jerry |  25000 |  40 | marketing   | hyderabad |
+| 106 | jerry |  25000 |  30 | operation   | mumbai    |
+| 106 | jerry |  25000 |  10 | development | banglore  |
+| 107 | scott |  24000 |  50 | sales       | pune      |
+| 107 | scott |  24000 |  40 | marketing   | hyderabad |
+| 107 | scott |  24000 |  30 | operation   | mumbai    |
+| 107 | scott |  24000 |  10 | development | banglore  |
+| 108 | raju  |  12000 |  50 | sales       | pune      |
+| 108 | raju  |  12000 |  30 | operation   | mumbai    |
+| 108 | raju  |  12000 |  20 | testing     | chennai   |
+| 108 | raju  |  12000 |  10 | development | banglore  |
++-----+-------+--------+-----+-------------+-----------+
+32 rows in set (0.00 sec)
+
+mysql> select eid,ename,salary,d.dno,dname,location from employee e cross join dept d where e.dno=d.dno;
++-----+-------+--------+-----+-------------+-----------+
+| eid | ename | salary | dno | dname       | location  |
++-----+-------+--------+-----+-------------+-----------+
+| 101 | king  |  50000 |  30 | operation   | mumbai    |
+| 102 | sam   |  35000 |  10 | development | banglore  |
+| 103 | ford  |  32000 |  20 | testing     | chennai   |
+| 104 | tom   |  28000 |  10 | development | banglore  |
+| 105 | adam  |  27000 |  10 | development | banglore  |
+| 106 | jerry |  25000 |  20 | testing     | chennai   |
+| 107 | scott |  24000 |  20 | testing     | chennai   |
+| 108 | raju  |  12000 |  40 | marketing   | hyderabad |
++-----+-------+--------+-----+-------------+-----------+
+8 rows in set (0.00 sec)
+
+mysql> select eid,ename,salary,d.dno,dname,location from employee e natural join dept d;
++-----+-------+--------+-----+-------------+-----------+
+| eid | ename | salary | dno | dname       | location  |
++-----+-------+--------+-----+-------------+-----------+
+| 101 | king  |  50000 |  30 | operation   | mumbai    |
+| 102 | sam   |  35000 |  10 | development | banglore  |
+| 103 | ford  |  32000 |  20 | testing     | chennai   |
+| 104 | tom   |  28000 |  10 | development | banglore  |
+| 105 | adam  |  27000 |  10 | development | banglore  |
+| 106 | jerry |  25000 |  20 | testing     | chennai   |
+| 107 | scott |  24000 |  20 | testing     | chennai   |
+| 108 | raju  |  12000 |  40 | marketing   | hyderabad |
++-----+-------+--------+-----+-------------+-----------+
+8 rows in set (0.00 sec)
+
+mysql> select eid,ename,salary,job,d.dno,dname,location from employee e left outer join dept d on e.dno=d.dno;
++-----+--------+--------+-----------+------+-------------+-----------+
+| eid | ename  | salary | job       | dno  | dname       | location  |
++-----+--------+--------+-----------+------+-------------+-----------+
+| 101 | king   |  50000 | president |   30 | operation   | mumbai    |
+| 102 | sam    |  35000 | manager   |   10 | development | banglore  |
+| 103 | ford   |  32000 | manager   |   20 | testing     | chennai   |
+| 104 | tom    |  28000 | developer |   10 | development | banglore  |
+| 105 | adam   |  27000 | developer |   10 | development | banglore  |
+| 106 | jerry  |  25000 | tester    |   20 | testing     | chennai   |
+| 107 | scott  |  24000 | tester    |   20 | testing     | chennai   |
+| 108 | raju   |  12000 | clerk     |   40 | marketing   | hyderabad |
+| 109 | javeed |  29000 | NULL      | NULL | NULL        | NULL      |
++-----+--------+--------+-----------+------+-------------+-----------+
+9 rows in set (0.00 sec)
+
+mysql> select d.dno,d,dname,eid,ename from employee e,dept d right outer join on d.dno=e.dno;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'on d.dno=e.dno' at line 1
+mysql> select d.dno,d.dname,eid,ename from employee e,dept d right outer join on d.dno=e.dno;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'on d.dno=e.dno' at line 1
+mysql> select d.dno,d.dname,eid,ename from employee e right outer join dept d on d.dno=e.dno;
++-----+-------------+------+-------+
+| dno | dname       | eid  | ename |
++-----+-------------+------+-------+
+|  10 | development |  105 | adam  |
+|  10 | development |  104 | tom   |
+|  10 | development |  102 | sam   |
+|  20 | testing     |  107 | scott |
+|  20 | testing     |  106 | jerry |
+|  20 | testing     |  103 | ford  |
+|  30 | operation   |  101 | king  |
+|  40 | marketing   |  108 | raju  |
+|  50 | sales       | NULL | NULL  |
++-----+-------------+------+-------+
+9 rows in set (0.00 sec)
+
+mysql> use madhuri;
+Database changed
+mysql> select * from madhu;
++-----+-------+-------+------------+------+
+| sid | sname | marks | doj        | city |
++-----+-------+-------+------------+------+
+|  21 | ram   |   530 | 2023-07-12 | hyd  |
+|  22 | mani  |   590 | 2023-07-02 | hyd  |
+|  23 | nani  |   560 | 2023-03-23 | elr  |
+|  24 | sam   |   580 | 2022-04-23 | bng  |
+|  25 | sanju |   520 | 2023-02-03 | bng  |
++-----+-------+-------+------------+------+
+5 rows in set (0.00 sec)
+
+mysql> select m.sid,m.sname,s.marks,s.city from madhu m selfjoin madhu s where m.sid=s.mid;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'selfjoin madhu s where m.sid=s.mid' at line 1
+mysql> select m.sid,m.sname,s.marks,s.city from madhu m self join madhu s where m.sid=s.mid;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'self join madhu s where m.sid=s.mid' at line 1
+mysql> select m.sid,m.sname,s.marks,s.city from madhu m ,madhu s where m.sid=s.mid;
+ERROR 1054 (42S22): Unknown column 's.mid' in 'where clause'
+mysql> select m.sid,m.sname,s.marks,s.city from madhu m ,madhu s where m.sid=s.sid;
++-----+-------+-------+------+
+| sid | sname | marks | city |
++-----+-------+-------+------+
+|  21 | ram   |   530 | hyd  |
+|  22 | mani  |   590 | hyd  |
+|  23 | nani  |   560 | elr  |
+|  24 | sam   |   580 | bng  |
+|  25 | sanju |   520 | bng  |
++-----+-------+-------+------+
+5 rows in set (0.00 sec)
+
+mysql> select city from madhu where city='elr';
++------+
+| city |
++------+
+| elr  |
++------+
+1 row in set (0.00 sec)
+
+mysql> select marks from madhu where city='elr';
++-------+
+| marks |
++-------+
+|   560 |
++-------+
+1 row in set (0.00 sec)
+
+mysql> select sid where marks>(select marks from madhu where city='elr');
+ERROR 1054 (42S22): Unknown column 'sid' in 'field list'
+mysql> select sid from madhu where marks>(select marks from madhu where city='elr');
++-----+
+| sid |
++-----+
+|  22 |
+|  24 |
++-----+
+2 rows in set (0.00 sec)
+
+mysql> select sid,marks from madhu where marks>(select marks from madhu where city IN('elr','hyd');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> select sid,marks from  where marks>(select marks from madhu where city IN('elr','hyd')madhu;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where marks>(select marks from madhu where city IN('elr','hyd')madhu' at line 1
+mysql> select sid,marks from  where marks>(select marks from madhu where city IN('elr','hyd'))madhu;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where marks>(select marks from madhu where city IN('elr','hyd'))madhu' at line 1
+mysql> select sid,marks from madhu where marks>(select marks from madhu where city IN('elr','hyd'));
+ERROR 1242 (21000): Subquery returns more than 1 row
+mysql>
+mysql> select sid,marks from madhu where mark=(select marks from madhu where city IN('elr','hyd'));
+ERROR 1054 (42S22): Unknown column 'mark' in 'where clause'
+mysql> select sid,marks from madhu where mark like (select marks from madhu where city IN('elr','hyd'));
+ERROR 1054 (42S22): Unknown column 'mark' in 'where clause'
+mysql> select sid from madhu where marks>(select marks from madhu where city='elr');
++-----+
+| sid |
++-----+
+|  22 |
+|  24 |
++-----+
+2 rows in set (0.00 sec)
+
+mysql> create view madhu_info as select * from madhu;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> desc madhu_info;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| sid   | int         | NO   |     | NULL    |       |
+| sname | varchar(50) | YES  |     | NULL    |       |
+| marks | int         | YES  |     | NULL    |       |
+| doj   | date        | YES  |     | NULL    |       |
+| city  | varchar(45) | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+mysql> use madhuri
+Database changed
+mysql> show tables;
+Empty set (0.00 sec)
+
+mysql> use madhuri;
+Database changed
+mysql> show tables;
++-------------------+
+| Tables_in_madhuri |
++-------------------+
+| madhu             |
+| raju              |
++-------------------+
+2 rows in set (0.00 sec)
+
+mysql> desc madhu
+    -> \c
+mysql> desc madhu;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| sid   | int         | NO   | PRI | NULL    |       |
+| sname | varchar(45) | YES  |     | NULL    |       |
+| marks | int         | YES  |     | NULL    |       |
+| doj   | date        | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> desc raju;
++--------+---------------+------+-----+---------+-------+
+| Field  | Type          | Null | Key | Default | Extra |
++--------+---------------+------+-----+---------+-------+
+| eid    | int           | NO   | PRI | NULL    |       |
+| ename  | varchar(45)   | YES  |     | NULL    |       |
+| salary | decimal(10,0) | YES  |     | NULL    |       |
+| doj    | date          | YES  |     | NULL    |       |
++--------+---------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> insert into madhu values(21,'ram',530,'2023-07-12');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> desc madhu;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| sid   | int         | NO   | PRI | NULL    |       |
+| sname | varchar(45) | YES  |     | NULL    |       |
+| marks | int         | YES  |     | NULL    |       |
+| doj   | date        | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> select * from madhu;
++-----+-------+-------+------------+
+| sid | sname | marks | doj        |
++-----+-------+-------+------------+
+|  21 | ram   |   530 | 2023-07-12 |
++-----+-------+-------+------------+
+1 row in set (0.00 sec)
+
+mysql> insert into madhu values(22,'mani',530,'2023-87-52');
+ERROR 1292 (22007): Incorrect date value: '2023-87-52' for column 'doj' at row 1
+mysql> insert into madhu values(22,'mani',530,'2023-07-2');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into madhu values(23,'nani',560,'2023-03-23');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into madhu values(24,'sam',580,'2022-04-23');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into madhu values(25,'sanju',520,'2023-02-3');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> select * from madhu;
++-----+-------+-------+------------+
+| sid | sname | marks | doj        |
++-----+-------+-------+------------+
+|  21 | ram   |   530 | 2023-07-12 |
+|  22 | mani  |   530 | 2023-07-02 |
+|  23 | nani  |   560 | 2023-03-23 |
+|  24 | sam   |   580 | 2022-04-23 |
+|  25 | sanju |   520 | 2023-02-03 |
++-----+-------+-------+------------+
+5 rows in set (0.00 sec)
+
+mysql> desc raju;
++--------+---------------+------+-----+---------+-------+
+| Field  | Type          | Null | Key | Default | Extra |
++--------+---------------+------+-----+---------+-------+
+| eid    | int           | NO   | PRI | NULL    |       |
+| ename  | varchar(45)   | YES  |     | NULL    |       |
+| salary | decimal(10,0) | YES  |     | NULL    |       |
+| doj    | date          | YES  |     | NULL    |       |
++--------+---------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> alter table madhu modify ename varchar(50);
+ERROR 1054 (42S22): Unknown column 'ename' in 'madhu'
+mysql> alter table madhu modify sname varchar(50);
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc madhu;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| sid   | int         | NO   | PRI | NULL    |       |
+| sname | varchar(50) | YES  |     | NULL    |       |
+| marks | int         | YES  |     | NULL    |       |
+| doj   | date        | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> alter table madhu modify add(city(varchar(45));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'add(city(varchar(45))' at line 1
+mysql> alter table madhu  add(city(varchar(45));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(varchar(45))' at line 1
+mysql> alter table madhu  add(city Varchar(45));
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table raju column eid;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'column eid' at line 1
+mysql> alter table raju  drop column eid;
+Query OK, 0 rows affected (0.04 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table raju  add(eid int);
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> update madhu set sid=22 where marks=590;
+Query OK, 0 rows affected (0.00 sec)
+Rows matched: 0  Changed: 0  Warnings: 0
+
+mysql> select * from madhu;
++-----+-------+-------+------------+------+
+| sid | sname | marks | doj        | city |
++-----+-------+-------+------------+------+
+|  21 | ram   |   530 | 2023-07-12 | NULL |
+|  22 | mani  |   530 | 2023-07-02 | NULL |
+|  23 | nani  |   560 | 2023-03-23 | NULL |
+|  24 | sam   |   580 | 2022-04-23 | NULL |
+|  25 | sanju |   520 | 2023-02-03 | NULL |
++-----+-------+-------+------------+------+
+5 rows in set (0.00 sec)
+
+mysql> update madhu set marks=590  where sid=22;
+Query OK, 1 row affected (0.03 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from madhu;
++-----+-------+-------+------------+------+
+| sid | sname | marks | doj        | city |
++-----+-------+-------+------------+------+
+|  21 | ram   |   530 | 2023-07-12 | NULL |
+|  22 | mani  |   590 | 2023-07-02 | NULL |
+|  23 | nani  |   560 | 2023-03-23 | NULL |
+|  24 | sam   |   580 | 2022-04-23 | NULL |
+|  25 | sanju |   520 | 2023-02-03 | NULL |
++-----+-------+-------+------------+------+
+5 rows in set (0.00 sec)
+
+mysql> select sid,sname from madhu where sid>23;
++-----+-------+
+| sid | sname |
++-----+-------+
+|  24 | sam   |
+|  25 | sanju |
++-----+-------+
+2 rows in set (0.00 sec)
+
+mysql> select * from madhu where marks between 530 and 580;
++-----+-------+-------+------------+------+
+| sid | sname | marks | doj        | city |
++-----+-------+-------+------------+------+
+|  21 | ram   |   530 | 2023-07-12 | NULL |
+|  23 | nani  |   560 | 2023-03-23 | NULL |
+|  24 | sam   |   580 | 2022-04-23 | NULL |
++-----+-------+-------+------------+------+
+3 rows in set (0.00 sec)
+
+mysql> select * from madhu where sname like 's%';
++-----+-------+-------+------------+------+
+| sid | sname | marks | doj        | city |
++-----+-------+-------+------------+------+
+|  24 | sam   |   580 | 2022-04-23 | NULL |
+|  25 | sanju |   520 | 2023-02-03 | NULL |
++-----+-------+-------+------------+------+
+2 rows in set (0.00 sec)
+
+mysql> select * from madhu where sname like '%m';
++-----+-------+-------+------------+------+
+| sid | sname | marks | doj        | city |
++-----+-------+-------+------------+------+
+|  21 | ram   |   530 | 2023-07-12 | NULL |
+|  24 | sam   |   580 | 2022-04-23 | NULL |
++-----+-------+-------+------------+------+
+2 rows in set (0.00 sec)
+
+mysql> select sum(marks) from madhu;
++------------+
+| sum(marks) |
++------------+
+|       2780 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select max(marks) from madhu;
++------------+
+| max(marks) |
++------------+
+|        590 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select min(marks) from madhu;
++------------+
+| min(marks) |
++------------+
+|        520 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select min(doj) from madhu;
++------------+
+| min(doj)   |
++------------+
+| 2022-04-23 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> update madhu set city='hyd' where sid>23;
+Query OK, 2 rows affected (0.01 sec)
+Rows matched: 2  Changed: 2  Warnings: 0
+
+mysql> select * from madhu;
++-----+-------+-------+------------+------+
+| sid | sname | marks | doj        | city |
++-----+-------+-------+------------+------+
+|  21 | ram   |   530 | 2023-07-12 | NULL |
+|  22 | mani  |   590 | 2023-07-02 | NULL |
+|  23 | nani  |   560 | 2023-03-23 | NULL |
+|  24 | sam   |   580 | 2022-04-23 | hyd  |
+|  25 | sanju |   520 | 2023-02-03 | hyd  |
++-----+-------+-------+------------+------+
+5 rows in set (0.00 sec)
+
+mysql> update madhu set city='bng' where sid>22;
+Query OK, 3 rows affected (0.03 sec)
+Rows matched: 3  Changed: 3  Warnings: 0
+
+mysql> update madhu set city='hyd' where sid=22;
+Query OK, 1 row affected (0.03 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from madhu;
++-----+-------+-------+------------+------+
+| sid | sname | marks | doj        | city |
++-----+-------+-------+------------+------+
+|  21 | ram   |   530 | 2023-07-12 | NULL |
+|  22 | mani  |   590 | 2023-07-02 | hyd  |
+|  23 | nani  |   560 | 2023-03-23 | bng  |
+|  24 | sam   |   580 | 2022-04-23 | bng  |
+|  25 | sanju |   520 | 2023-02-03 | bng  |
++-----+-------+-------+------------+------+
+5 rows in set (0.00 sec)
+
+mysql> update madhu set city='hyd' where sid=21;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update madhu set city='elr'where sid=23;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from madhu;
++-----+-------+-------+------------+------+
+| sid | sname | marks | doj        | city |
++-----+-------+-------+------------+------+
+|  21 | ram   |   530 | 2023-07-12 | hyd  |
+|  22 | mani  |   590 | 2023-07-02 | hyd  |
+|  23 | nani  |   560 | 2023-03-23 | elr  |
+|  24 | sam   |   580 | 2022-04-23 | bng  |
+|  25 | sanju |   520 | 2023-02-03 | bng  |
++-----+-------+-------+------------+------+
+5 rows in set (0.00 sec)
+
+mysql> select sname,sum(marks) group by city;
+ERROR 1054 (42S22): Unknown column 'sname' in 'field list'
+mysql> select sname,sum(marks) from madhu group by city;
++-------+------------+
+| sname | sum(marks) |
++-------+------------+
+| ram   |       1120 |
+| nani  |        560 |
+| sam   |       1100 |
++-------+------------+
+3 rows in set (0.01 sec)
+
+mysql> select city,sum(marks) from madhu group by city;
++------+------------+
+| city | sum(marks) |
++------+------------+
+| hyd  |       1120 |
+| elr  |        560 |
+| bng  |       1100 |
++------+------------+
+3 rows in set (0.00 sec)
+
+mysql> select city,sum(marks) from madhu group by city having eid>23 order by city;
+ERROR 1054 (42S22): Unknown column 'eid' in 'having clause'
+mysql> select city,sum(marks) from madhu group by city having sid>23 order by city;
+ERROR 1054 (42S22): Unknown column 'sid' in 'having clause'
+mysql> select city,sum(marks) from madhu group by city having sid>23;
+ERROR 1054 (42S22): Unknown column 'sid' in 'having clause'
+mysql> select city,sum(marks) from madhu group by city having sid=23;
+ERROR 1054 (42S22): Unknown column 'sid' in 'having clause'
+mysql> select city,sum(marks) from madhu group by city order by city;
++------+------------+
+| city | sum(marks) |
++------+------------+
+| bng  |       1100 |
+| elr  |        560 |
+| hyd  |       1120 |
++------+------------+
+3 rows in set (0.00 sec)
+
+mysql> select * from raju;
+Empty set (0.00 sec)
+
+mysql> desc raju;
++--------+---------------+------+-----+---------+-------+
+| Field  | Type          | Null | Key | Default | Extra |
++--------+---------------+------+-----+---------+-------+
+| ename  | varchar(45)   | YES  |     | NULL    |       |
+| salary | decimal(10,0) | YES  |     | NULL    |       |
+| doj    | date          | YES  |     | NULL    |       |
+| eid    | int           | YES  |     | NULL    |       |
++--------+---------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> drop column eid from raju;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'column eid from raju' at line 1
+mysql> delete column coulmn="eid" from raju;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'column coulmn="eid" from raju' at line 1
+mysql> delete column coulmn="eid" from raju;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'column coulmn="eid" from raju' at line 1
+mysql> ^C
+mysql> \c
+mysql> CREATE TABLE Books
+    -> (
+    -> Id INT PRIMARY KEY IDENTITY(1,1),
+    -> Name VARCHAR (50) NOT NULL,
+    -> Price INT,
+    -> CategoryId INT,
+    -> AuthorId INT
+    -> )
+    -> \c
+mysql> CREATE TABLE Books
+    -> (
+    -> Id INT PRIMARY KEY IDENTITY(1,1),
+    -> Name VARCHAR (50) NOT NULL,
+    -> Price INT,
+    -> CategoryId INT,
+    -> AuthorId INT
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'IDENTITY(1,1),
+Name VARCHAR (50) NOT NULL,
+Price INT,
+CategoryId INT,
+AuthorId ' at line 3
+mysql> CREATE TABLE Books
+    -> (
+    -> Id INT PRIMARY KEY IDENTITY(1,1),
+    -> Name VARCHAR (50) NOT NULL,
+    -> Price INT,
+    -> CategoryId INT,
+    -> AuthorId INT
+    -> Id INT PRIMARY KEY IDENTITY(1,1),\
+    -> \c
+mysql> CREATE TABLE Books
+    -> (
+    -> Id INT PRIMARY KEY IDENTITY(1,1),
+    -> Name VARCHAR (50) NOT NULL,
+    -> Price INT,
+    -> CategoryId INT,
+    -> AuthorId INT
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'IDENTITY(1,1),
+Name VARCHAR (50) NOT NULL,
+Price INT,
+CategoryId INT,
+AuthorId ' at line 3
+mysql> use employee_db;
+Database changed
+mysql> select * from employee;
++-----+--------+--------+------+-----------+------------+------+------+
+| eid | ename  | salary | comm | job       | doj        | mid  | dno  |
++-----+--------+--------+------+-----------+------------+------+------+
+| 101 | king   |  50000 | NULL | president | 2020-10-21 | NULL |   30 |
+| 102 | sam    |  35000 | NULL | manager   | 2020-12-21 |  101 |   10 |
+| 103 | ford   |  32000 | NULL | manager   | 2020-11-01 |  101 |   20 |
+| 104 | tom    |  28000 |  900 | developer | 2021-06-29 |  102 |   10 |
+| 105 | adam   |  27000 | 1000 | developer | 2021-09-23 |  102 |   10 |
+| 106 | jerry  |  25000 | 3000 | tester    | 2021-05-15 |  103 |   20 |
+| 107 | scott  |  24000 | 3000 | tester    | 2021-05-15 |  103 |   20 |
+| 108 | raju   |  12000 |  500 | clerk     | 2023-10-19 |  101 |   40 |
+| 109 | javeed |  29000 | NULL | NULL      | NULL       | NULL | NULL |
++-----+--------+--------+------+-----------+------------+------+------+
+9 rows in set (0.00 sec)
+
+mysql> select * from dept;
++-----+-------------+-----------+
+| dno | dname       | location  |
++-----+-------------+-----------+
+|  10 | development | banglore  |
+|  20 | testing     | chennai   |
+|  30 | operation   | mumbai    |
+|  40 | marketing   | hyderabad |
+|  50 | sales       | pune      |
++-----+-------------+-----------+
+5 rows in set (0.00 sec)
+
+mysql> select eid,ename,salary,d.dno,dname,location from employee e,dept d where e.dno=d.dno;
++-----+-------+--------+-----+-------------+-----------+
+| eid | ename | salary | dno | dname       | location  |
++-----+-------+--------+-----+-------------+-----------+
+| 101 | king  |  50000 |  30 | operation   | mumbai    |
+| 102 | sam   |  35000 |  10 | development | banglore  |
+| 103 | ford  |  32000 |  20 | testing     | chennai   |
+| 104 | tom   |  28000 |  10 | development | banglore  |
+| 105 | adam  |  27000 |  10 | development | banglore  |
+| 106 | jerry |  25000 |  20 | testing     | chennai   |
+| 107 | scott |  24000 |  20 | testing     | chennai   |
+| 108 | raju  |  12000 |  40 | marketing   | hyderabad |
++-----+-------+--------+-----+-------------+-----------+
+8 rows in set (0.00 sec)
+
+mysql> select eid,ename,salary,d.dno,dname,location from employee e,dept d where e.dno!=d.dno;
++-----+-------+--------+-----+-------------+-----------+
+| eid | ename | salary | dno | dname       | location  |
++-----+-------+--------+-----+-------------+-----------+
+| 101 | king  |  50000 |  50 | sales       | pune      |
+| 101 | king  |  50000 |  40 | marketing   | hyderabad |
+| 101 | king  |  50000 |  20 | testing     | chennai   |
+| 101 | king  |  50000 |  10 | development | banglore  |
+| 102 | sam   |  35000 |  50 | sales       | pune      |
+| 102 | sam   |  35000 |  40 | marketing   | hyderabad |
+| 102 | sam   |  35000 |  30 | operation   | mumbai    |
+| 102 | sam   |  35000 |  20 | testing     | chennai   |
+| 103 | ford  |  32000 |  50 | sales       | pune      |
+| 103 | ford  |  32000 |  40 | marketing   | hyderabad |
+| 103 | ford  |  32000 |  30 | operation   | mumbai    |
+| 103 | ford  |  32000 |  10 | development | banglore  |
+| 104 | tom   |  28000 |  50 | sales       | pune      |
+| 104 | tom   |  28000 |  40 | marketing   | hyderabad |
+| 104 | tom   |  28000 |  30 | operation   | mumbai    |
+| 104 | tom   |  28000 |  20 | testing     | chennai   |
+| 105 | adam  |  27000 |  50 | sales       | pune      |
+| 105 | adam  |  27000 |  40 | marketing   | hyderabad |
+| 105 | adam  |  27000 |  30 | operation   | mumbai    |
+| 105 | adam  |  27000 |  20 | testing     | chennai   |
+| 106 | jerry |  25000 |  50 | sales       | pune      |
+| 106 | jerry |  25000 |  40 | marketing   | hyderabad |
+| 106 | jerry |  25000 |  30 | operation   | mumbai    |
+| 106 | jerry |  25000 |  10 | development | banglore  |
+| 107 | scott |  24000 |  50 | sales       | pune      |
+| 107 | scott |  24000 |  40 | marketing   | hyderabad |
+| 107 | scott |  24000 |  30 | operation   | mumbai    |
+| 107 | scott |  24000 |  10 | development | banglore  |
+| 108 | raju  |  12000 |  50 | sales       | pune      |
+| 108 | raju  |  12000 |  30 | operation   | mumbai    |
+| 108 | raju  |  12000 |  20 | testing     | chennai   |
+| 108 | raju  |  12000 |  10 | development | banglore  |
++-----+-------+--------+-----+-------------+-----------+
+32 rows in set (0.00 sec)
+
+mysql> select eid,ename,salary,d.dno,dname,location from employee e cross join dept d where e.dno=d.dno;
++-----+-------+--------+-----+-------------+-----------+
+| eid | ename | salary | dno | dname       | location  |
++-----+-------+--------+-----+-------------+-----------+
+| 101 | king  |  50000 |  30 | operation   | mumbai    |
+| 102 | sam   |  35000 |  10 | development | banglore  |
+| 103 | ford  |  32000 |  20 | testing     | chennai   |
+| 104 | tom   |  28000 |  10 | development | banglore  |
+| 105 | adam  |  27000 |  10 | development | banglore  |
+| 106 | jerry |  25000 |  20 | testing     | chennai   |
+| 107 | scott |  24000 |  20 | testing     | chennai   |
+| 108 | raju  |  12000 |  40 | marketing   | hyderabad |
++-----+-------+--------+-----+-------------+-----------+
+8 rows in set (0.00 sec)
+
+mysql> select eid,ename,salary,d.dno,dname,location from employee e natural join dept d;
++-----+-------+--------+-----+-------------+-----------+
+| eid | ename | salary | dno | dname       | location  |
++-----+-------+--------+-----+-------------+-----------+
+| 101 | king  |  50000 |  30 | operation   | mumbai    |
+| 102 | sam   |  35000 |  10 | development | banglore  |
+| 103 | ford  |  32000 |  20 | testing     | chennai   |
+| 104 | tom   |  28000 |  10 | development | banglore  |
+| 105 | adam  |  27000 |  10 | development | banglore  |
+| 106 | jerry |  25000 |  20 | testing     | chennai   |
+| 107 | scott |  24000 |  20 | testing     | chennai   |
+| 108 | raju  |  12000 |  40 | marketing   | hyderabad |
++-----+-------+--------+-----+-------------+-----------+
+8 rows in set (0.00 sec)
+
+mysql> select eid,ename,salary,job,d.dno,dname,location from employee e left outer join dept d on e.dno=d.dno;
++-----+--------+--------+-----------+------+-------------+-----------+
+| eid | ename  | salary | job       | dno  | dname       | location  |
++-----+--------+--------+-----------+------+-------------+-----------+
+| 101 | king   |  50000 | president |   30 | operation   | mumbai    |
+| 102 | sam    |  35000 | manager   |   10 | development | banglore  |
+| 103 | ford   |  32000 | manager   |   20 | testing     | chennai   |
+| 104 | tom    |  28000 | developer |   10 | development | banglore  |
+| 105 | adam   |  27000 | developer |   10 | development | banglore  |
+| 106 | jerry  |  25000 | tester    |   20 | testing     | chennai   |
+| 107 | scott  |  24000 | tester    |   20 | testing     | chennai   |
+| 108 | raju   |  12000 | clerk     |   40 | marketing   | hyderabad |
+| 109 | javeed |  29000 | NULL      | NULL | NULL        | NULL      |
++-----+--------+--------+-----------+------+-------------+-----------+
+9 rows in set (0.00 sec)
+
+mysql> select d.dno,d,dname,eid,ename from employee e,dept d right outer join on d.dno=e.dno;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'on d.dno=e.dno' at line 1
+mysql> select d.dno,d.dname,eid,ename from employee e,dept d right outer join on d.dno=e.dno;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'on d.dno=e.dno' at line 1
+mysql> select d.dno,d.dname,eid,ename from employee e right outer join dept d on d.dno=e.dno;
++-----+-------------+------+-------+
+| dno | dname       | eid  | ename |
++-----+-------------+------+-------+
+|  10 | development |  105 | adam  |
+|  10 | development |  104 | tom   |
+|  10 | development |  102 | sam   |
+|  20 | testing     |  107 | scott |
+|  20 | testing     |  106 | jerry |
+|  20 | testing     |  103 | ford  |
+|  30 | operation   |  101 | king  |
+|  40 | marketing   |  108 | raju  |
+|  50 | sales       | NULL | NULL  |
++-----+-------------+------+-------+
+9 rows in set (0.00 sec)
+
+mysql> use madhuri;
+Database changed
+mysql> select * from madhu;
++-----+-------+-------+------------+------+
+| sid | sname | marks | doj        | city |
++-----+-------+-------+------------+------+
+|  21 | ram   |   530 | 2023-07-12 | hyd  |
+|  22 | mani  |   590 | 2023-07-02 | hyd  |
+|  23 | nani  |   560 | 2023-03-23 | elr  |
+|  24 | sam   |   580 | 2022-04-23 | bng  |
+|  25 | sanju |   520 | 2023-02-03 | bng  |
++-----+-------+-------+------------+------+
+5 rows in set (0.00 sec)
+
+mysql> select m.sid,m.sname,s.marks,s.city from madhu m selfjoin madhu s where m.sid=s.mid;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'selfjoin madhu s where m.sid=s.mid' at line 1
+mysql> select m.sid,m.sname,s.marks,s.city from madhu m self join madhu s where m.sid=s.mid;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'self join madhu s where m.sid=s.mid' at line 1
+mysql> select m.sid,m.sname,s.marks,s.city from madhu m ,madhu s where m.sid=s.mid;
+ERROR 1054 (42S22): Unknown column 's.mid' in 'where clause'
+mysql> select m.sid,m.sname,s.marks,s.city from madhu m ,madhu s where m.sid=s.sid;
++-----+-------+-------+------+
+| sid | sname | marks | city |
++-----+-------+-------+------+
+|  21 | ram   |   530 | hyd  |
+|  22 | mani  |   590 | hyd  |
+|  23 | nani  |   560 | elr  |
+|  24 | sam   |   580 | bng  |
+|  25 | sanju |   520 | bng  |
++-----+-------+-------+------+
+5 rows in set (0.00 sec)
+
+mysql> select city from madhu where city='elr';
++------+
+| city |
++------+
+| elr  |
++------+
+1 row in set (0.00 sec)
+
+mysql> select marks from madhu where city='elr';
++-------+
+| marks |
++-------+
+|   560 |
++-------+
+1 row in set (0.00 sec)
+
+mysql> select sid where marks>(select marks from madhu where city='elr');
+ERROR 1054 (42S22): Unknown column 'sid' in 'field list'
+mysql> select sid from madhu where marks>(select marks from madhu where city='elr');
++-----+
+| sid |
++-----+
+|  22 |
+|  24 |
++-----+
+2 rows in set (0.00 sec)
+
+mysql> select sid,marks from madhu where marks>(select marks from madhu where city IN('elr','hyd');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> select sid,marks from  where marks>(select marks from madhu where city IN('elr','hyd')madhu;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where marks>(select marks from madhu where city IN('elr','hyd')madhu' at line 1
+mysql> select sid,marks from  where marks>(select marks from madhu where city IN('elr','hyd'))madhu;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where marks>(select marks from madhu where city IN('elr','hyd'))madhu' at line 1
+mysql> select sid,marks from madhu where marks>(select marks from madhu where city IN('elr','hyd'));
+ERROR 1242 (21000): Subquery returns more than 1 row
+mysql>
+mysql> select sid,marks from madhu where mark=(select marks from madhu where city IN('elr','hyd'));
+ERROR 1054 (42S22): Unknown column 'mark' in 'where clause'
+mysql> select sid,marks from madhu where mark like (select marks from madhu where city IN('elr','hyd'));
+ERROR 1054 (42S22): Unknown column 'mark' in 'where clause'
+mysql> select sid from madhu where marks>(select marks from madhu where city='elr');
++-----+
+| sid |
++-----+
+|  22 |
+|  24 |
++-----+
+2 rows in set (0.00 sec)
+
+mysql> create view madhu_info as select * from madhu;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> desc madhu_info;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| sid   | int         | NO   |     | NULL    |       |
+| sname | varchar(50) | YES  |     | NULL    |       |
+| marks | int         | YES  |     | NULL    |       |
+| doj   | date        | YES  |     | NULL    |       |
+| city  | varchar(45) | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+mysql> use madhuri
+Database changed
+mysql> show tables;
+Empty set (0.00 sec)
+
+mysql> use madhuri;
+Database changed
+mysql> show tables;
++-------------------+
+| Tables_in_madhuri |
++-------------------+
+| madhu             |
+| raju              |
++-------------------+
+2 rows in set (0.00 sec)
+
+mysql> desc madhu
+    -> \c
+mysql> desc madhu;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| sid   | int         | NO   | PRI | NULL    |       |
+| sname | varchar(45) | YES  |     | NULL    |       |
+| marks | int         | YES  |     | NULL    |       |
+| doj   | date        | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> desc raju;
++--------+---------------+------+-----+---------+-------+
+| Field  | Type          | Null | Key | Default | Extra |
++--------+---------------+------+-----+---------+-------+
+| eid    | int           | NO   | PRI | NULL    |       |
+| ename  | varchar(45)   | YES  |     | NULL    |       |
+| salary | decimal(10,0) | YES  |     | NULL    |       |
+| doj    | date          | YES  |     | NULL    |       |
++--------+---------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> insert into madhu values(21,'ram',530,'2023-07-12');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> desc madhu;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| sid   | int         | NO   | PRI | NULL    |       |
+| sname | varchar(45) | YES  |     | NULL    |       |
+| marks | int         | YES  |     | NULL    |       |
+| doj   | date        | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> select * from madhu;
++-----+-------+-------+------------+
+| sid | sname | marks | doj        |
++-----+-------+-------+------------+
+|  21 | ram   |   530 | 2023-07-12 |
++-----+-------+-------+------------+
+1 row in set (0.00 sec)
+
+mysql> insert into madhu values(22,'mani',530,'2023-87-52');
+ERROR 1292 (22007): Incorrect date value: '2023-87-52' for column 'doj' at row 1
+mysql> insert into madhu values(22,'mani',530,'2023-07-2');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into madhu values(23,'nani',560,'2023-03-23');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into madhu values(24,'sam',580,'2022-04-23');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into madhu values(25,'sanju',520,'2023-02-3');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> select * from madhu;
++-----+-------+-------+------------+
+| sid | sname | marks | doj        |
++-----+-------+-------+------------+
+|  21 | ram   |   530 | 2023-07-12 |
+|  22 | mani  |   530 | 2023-07-02 |
+|  23 | nani  |   560 | 2023-03-23 |
+|  24 | sam   |   580 | 2022-04-23 |
+|  25 | sanju |   520 | 2023-02-03 |
++-----+-------+-------+------------+
+5 rows in set (0.00 sec)
+
+mysql> desc raju;
++--------+---------------+------+-----+---------+-------+
+| Field  | Type          | Null | Key | Default | Extra |
++--------+---------------+------+-----+---------+-------+
+| eid    | int           | NO   | PRI | NULL    |       |
+| ename  | varchar(45)   | YES  |     | NULL    |       |
+| salary | decimal(10,0) | YES  |     | NULL    |       |
+| doj    | date          | YES  |     | NULL    |       |
++--------+---------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> alter table madhu modify ename varchar(50);
+ERROR 1054 (42S22): Unknown column 'ename' in 'madhu'
+mysql> alter table madhu modify sname varchar(50);
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc madhu;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| sid   | int         | NO   | PRI | NULL    |       |
+| sname | varchar(50) | YES  |     | NULL    |       |
+| marks | int         | YES  |     | NULL    |       |
+| doj   | date        | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> alter table madhu modify add(city(varchar(45));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'add(city(varchar(45))' at line 1
+mysql> alter table madhu  add(city(varchar(45));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(varchar(45))' at line 1
+mysql> alter table madhu  add(city Varchar(45));
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table raju column eid;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'column eid' at line 1
+mysql> alter table raju  drop column eid;
+Query OK, 0 rows affected (0.04 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table raju  add(eid int);
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> update madhu set sid=22 where marks=590;
+Query OK, 0 rows affected (0.00 sec)
+Rows matched: 0  Changed: 0  Warnings: 0
+
+mysql> select * from madhu;
++-----+-------+-------+------------+------+
+| sid | sname | marks | doj        | city |
++-----+-------+-------+------------+------+
+|  21 | ram   |   530 | 2023-07-12 | NULL |
+|  22 | mani  |   530 | 2023-07-02 | NULL |
+|  23 | nani  |   560 | 2023-03-23 | NULL |
+|  24 | sam   |   580 | 2022-04-23 | NULL |
+|  25 | sanju |   520 | 2023-02-03 | NULL |
++-----+-------+-------+------------+------+
+5 rows in set (0.00 sec)
+
+mysql> update madhu set marks=590  where sid=22;
+Query OK, 1 row affected (0.03 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from madhu;
++-----+-------+-------+------------+------+
+| sid | sname | marks | doj        | city |
++-----+-------+-------+------------+------+
+|  21 | ram   |   530 | 2023-07-12 | NULL |
+|  22 | mani  |   590 | 2023-07-02 | NULL |
+|  23 | nani  |   560 | 2023-03-23 | NULL |
+|  24 | sam   |   580 | 2022-04-23 | NULL |
+|  25 | sanju |   520 | 2023-02-03 | NULL |
++-----+-------+-------+------------+------+
+5 rows in set (0.00 sec)
+
+mysql> select sid,sname from madhu where sid>23;
++-----+-------+
+| sid | sname |
++-----+-------+
+|  24 | sam   |
+|  25 | sanju |
++-----+-------+
+2 rows in set (0.00 sec)
+
+mysql> select * from madhu where marks between 530 and 580;
++-----+-------+-------+------------+------+
+| sid | sname | marks | doj        | city |
++-----+-------+-------+------------+------+
+|  21 | ram   |   530 | 2023-07-12 | NULL |
+|  23 | nani  |   560 | 2023-03-23 | NULL |
+|  24 | sam   |   580 | 2022-04-23 | NULL |
++-----+-------+-------+------------+------+
+3 rows in set (0.00 sec)
+
+mysql> select * from madhu where sname like 's%';
++-----+-------+-------+------------+------+
+| sid | sname | marks | doj        | city |
++-----+-------+-------+------------+------+
+|  24 | sam   |   580 | 2022-04-23 | NULL |
+|  25 | sanju |   520 | 2023-02-03 | NULL |
++-----+-------+-------+------------+------+
+2 rows in set (0.00 sec)
+
+mysql> select * from madhu where sname like '%m';
++-----+-------+-------+------------+------+
+| sid | sname | marks | doj        | city |
++-----+-------+-------+------------+------+
+|  21 | ram   |   530 | 2023-07-12 | NULL |
+|  24 | sam   |   580 | 2022-04-23 | NULL |
++-----+-------+-------+------------+------+
+2 rows in set (0.00 sec)
+
+mysql> select sum(marks) from madhu;
++------------+
+| sum(marks) |
++------------+
+|       2780 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select max(marks) from madhu;
++------------+
+| max(marks) |
++------------+
+|        590 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select min(marks) from madhu;
++------------+
+| min(marks) |
++------------+
+|        520 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select min(doj) from madhu;
++------------+
+| min(doj)   |
++------------+
+| 2022-04-23 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> update madhu set city='hyd' where sid>23;
+Query OK, 2 rows affected (0.01 sec)
+Rows matched: 2  Changed: 2  Warnings: 0
+
+mysql> select * from madhu;
++-----+-------+-------+------------+------+
+| sid | sname | marks | doj        | city |
++-----+-------+-------+------------+------+
+|  21 | ram   |   530 | 2023-07-12 | NULL |
+|  22 | mani  |   590 | 2023-07-02 | NULL |
+|  23 | nani  |   560 | 2023-03-23 | NULL |
+|  24 | sam   |   580 | 2022-04-23 | hyd  |
+|  25 | sanju |   520 | 2023-02-03 | hyd  |
++-----+-------+-------+------------+------+
+5 rows in set (0.00 sec)
+
+mysql> update madhu set city='bng' where sid>22;
+Query OK, 3 rows affected (0.03 sec)
+Rows matched: 3  Changed: 3  Warnings: 0
+
+mysql> update madhu set city='hyd' where sid=22;
+Query OK, 1 row affected (0.03 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from madhu;
++-----+-------+-------+------------+------+
+| sid | sname | marks | doj        | city |
++-----+-------+-------+------------+------+
+|  21 | ram   |   530 | 2023-07-12 | NULL |
+|  22 | mani  |   590 | 2023-07-02 | hyd  |
+|  23 | nani  |   560 | 2023-03-23 | bng  |
+|  24 | sam   |   580 | 2022-04-23 | bng  |
+|  25 | sanju |   520 | 2023-02-03 | bng  |
++-----+-------+-------+------------+------+
+5 rows in set (0.00 sec)
+
+mysql> update madhu set city='hyd' where sid=21;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update madhu set city='elr'where sid=23;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from madhu;
++-----+-------+-------+------------+------+
+| sid | sname | marks | doj        | city |
++-----+-------+-------+------------+------+
+|  21 | ram   |   530 | 2023-07-12 | hyd  |
+|  22 | mani  |   590 | 2023-07-02 | hyd  |
+|  23 | nani  |   560 | 2023-03-23 | elr  |
+|  24 | sam   |   580 | 2022-04-23 | bng  |
+|  25 | sanju |   520 | 2023-02-03 | bng  |
++-----+-------+-------+------------+------+
+5 rows in set (0.00 sec)
+
+mysql> select sname,sum(marks) group by city;
+ERROR 1054 (42S22): Unknown column 'sname' in 'field list'
+mysql> select sname,sum(marks) from madhu group by city;
++-------+------------+
+| sname | sum(marks) |
++-------+------------+
+| ram   |       1120 |
+| nani  |        560 |
+| sam   |       1100 |
++-------+------------+
+3 rows in set (0.01 sec)
+
+mysql> select city,sum(marks) from madhu group by city;
++------+------------+
+| city | sum(marks) |
++------+------------+
+| hyd  |       1120 |
+| elr  |        560 |
+| bng  |       1100 |
++------+------------+
+3 rows in set (0.00 sec)
+
+mysql> select city,sum(marks) from madhu group by city having eid>23 order by city;
+ERROR 1054 (42S22): Unknown column 'eid' in 'having clause'
+mysql> select city,sum(marks) from madhu group by city having sid>23 order by city;
+ERROR 1054 (42S22): Unknown column 'sid' in 'having clause'
+mysql> select city,sum(marks) from madhu group by city having sid>23;
+ERROR 1054 (42S22): Unknown column 'sid' in 'having clause'
+mysql> select city,sum(marks) from madhu group by city having sid=23;
+ERROR 1054 (42S22): Unknown column 'sid' in 'having clause'
+mysql> select city,sum(marks) from madhu group by city order by city;
++------+------------+
+| city | sum(marks) |
++------+------------+
+| bng  |       1100 |
+| elr  |        560 |
+| hyd  |       1120 |
++------+------------+
+3 rows in set (0.00 sec)
+
+mysql> select * from raju;
+Empty set (0.00 sec)
+
+mysql> desc raju;
++--------+---------------+------+-----+---------+-------+
+| Field  | Type          | Null | Key | Default | Extra |
++--------+---------------+------+-----+---------+-------+
+| ename  | varchar(45)   | YES  |     | NULL    |       |
+| salary | decimal(10,0) | YES  |     | NULL    |       |
+| doj    | date          | YES  |     | NULL    |       |
+| eid    | int           | YES  |     | NULL    |       |
++--------+---------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> drop column eid from raju;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'column eid from raju' at line 1
+mysql> delete column coulmn="eid" from raju;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'column coulmn="eid" from raju' at line 1
+mysql> delete column coulmn="eid" from raju;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'column coulmn="eid" from raju' at line 1
+mysql> ^C
+mysql> \c
+mysql> CREATE TABLE Books
+    -> (
+    -> Id INT PRIMARY KEY IDENTITY(1,1),
+    -> Name VARCHAR (50) NOT NULL,
+    -> Price INT,
+    -> CategoryId INT,
+    -> AuthorId INT
+    -> )
+    -> \c
+mysql> CREATE TABLE Books
+    -> (
+    -> Id INT PRIMARY KEY IDENTITY(1,1),
+    -> Name VARCHAR (50) NOT NULL,
+    -> Price INT,
+    -> CategoryId INT,
+    -> AuthorId INT
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'IDENTITY(1,1),
+Name VARCHAR (50) NOT NULL,
+Price INT,
+CategoryId INT,
+AuthorId ' at line 3
+mysql> CREATE TABLE Books
+    -> (
+    -> Id INT PRIMARY KEY IDENTITY(1,1),
+    -> Name VARCHAR (50) NOT NULL,
+    -> Price INT,
+    -> CategoryId INT,
+    -> AuthorId INT
+    -> Id INT PRIMARY KEY IDENTITY(1,1),\
+    -> \c
+mysql> CREATE TABLE Books
+    -> (
+    -> Id INT PRIMARY KEY IDENTITY(1,1),
+    -> Name VARCHAR (50) NOT NULL,
+    -> Price INT,
+    -> CategoryId INT,
+    -> AuthorId INT
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'IDENTITY(1,1),
+Name VARCHAR (50) NOT NULL,
+Price INT,
+CategoryId INT,
+AuthorId ' at line 3
+mysql> use employee_db;
+Database changed
+mysql> select * from employee;
++-----+--------+--------+------+-----------+------------+------+------+
+| eid | ename  | salary | comm | job       | doj        | mid  | dno  |
++-----+--------+--------+------+-----------+------------+------+------+
+| 101 | king   |  50000 | NULL | president | 2020-10-21 | NULL |   30 |
+| 102 | sam    |  35000 | NULL | manager   | 2020-12-21 |  101 |   10 |
+| 103 | ford   |  32000 | NULL | manager   | 2020-11-01 |  101 |   20 |
+| 104 | tom    |  28000 |  900 | developer | 2021-06-29 |  102 |   10 |
+| 105 | adam   |  27000 | 1000 | developer | 2021-09-23 |  102 |   10 |
+| 106 | jerry  |  25000 | 3000 | tester    | 2021-05-15 |  103 |   20 |
+| 107 | scott  |  24000 | 3000 | tester    | 2021-05-15 |  103 |   20 |
+| 108 | raju   |  12000 |  500 | clerk     | 2023-10-19 |  101 |   40 |
+| 109 | javeed |  29000 | NULL | NULL      | NULL       | NULL | NULL |
++-----+--------+--------+------+-----------+------------+------+------+
+9 rows in set (0.00 sec)
+
+mysql> select * from dept;
++-----+-------------+-----------+
+| dno | dname       | location  |
++-----+-------------+-----------+
+|  10 | development | banglore  |
+|  20 | testing     | chennai   |
+|  30 | operation   | mumbai    |
+|  40 | marketing   | hyderabad |
+|  50 | sales       | pune      |
++-----+-------------+-----------+
+5 rows in set (0.00 sec)
+
+mysql> select eid,ename,salary,d.dno,dname,location from employee e,dept d where e.dno=d.dno;
++-----+-------+--------+-----+-------------+-----------+
+| eid | ename | salary | dno | dname       | location  |
++-----+-------+--------+-----+-------------+-----------+
+| 101 | king  |  50000 |  30 | operation   | mumbai    |
+| 102 | sam   |  35000 |  10 | development | banglore  |
+| 103 | ford  |  32000 |  20 | testing     | chennai   |
+| 104 | tom   |  28000 |  10 | development | banglore  |
+| 105 | adam  |  27000 |  10 | development | banglore  |
+| 106 | jerry |  25000 |  20 | testing     | chennai   |
+| 107 | scott |  24000 |  20 | testing     | chennai   |
+| 108 | raju  |  12000 |  40 | marketing   | hyderabad |
++-----+-------+--------+-----+-------------+-----------+
+8 rows in set (0.00 sec)
+
+mysql> select eid,ename,salary,d.dno,dname,location from employee e,dept d where e.dno!=d.dno;
++-----+-------+--------+-----+-------------+-----------+
+| eid | ename | salary | dno | dname       | location  |
++-----+-------+--------+-----+-------------+-----------+
+| 101 | king  |  50000 |  50 | sales       | pune      |
+| 101 | king  |  50000 |  40 | marketing   | hyderabad |
+| 101 | king  |  50000 |  20 | testing     | chennai   |
+| 101 | king  |  50000 |  10 | development | banglore  |
+| 102 | sam   |  35000 |  50 | sales       | pune      |
+| 102 | sam   |  35000 |  40 | marketing   | hyderabad |
+| 102 | sam   |  35000 |  30 | operation   | mumbai    |
+| 102 | sam   |  35000 |  20 | testing     | chennai   |
+| 103 | ford  |  32000 |  50 | sales       | pune      |
+| 103 | ford  |  32000 |  40 | marketing   | hyderabad |
+| 103 | ford  |  32000 |  30 | operation   | mumbai    |
+| 103 | ford  |  32000 |  10 | development | banglore  |
+| 104 | tom   |  28000 |  50 | sales       | pune      |
+| 104 | tom   |  28000 |  40 | marketing   | hyderabad |
+| 104 | tom   |  28000 |  30 | operation   | mumbai    |
+| 104 | tom   |  28000 |  20 | testing     | chennai   |
+| 105 | adam  |  27000 |  50 | sales       | pune      |
+| 105 | adam  |  27000 |  40 | marketing   | hyderabad |
+| 105 | adam  |  27000 |  30 | operation   | mumbai    |
+| 105 | adam  |  27000 |  20 | testing     | chennai   |
+| 106 | jerry |  25000 |  50 | sales       | pune      |
+| 106 | jerry |  25000 |  40 | marketing   | hyderabad |
+| 106 | jerry |  25000 |  30 | operation   | mumbai    |
+| 106 | jerry |  25000 |  10 | development | banglore  |
+| 107 | scott |  24000 |  50 | sales       | pune      |
+| 107 | scott |  24000 |  40 | marketing   | hyderabad |
+| 107 | scott |  24000 |  30 | operation   | mumbai    |
+| 107 | scott |  24000 |  10 | development | banglore  |
+| 108 | raju  |  12000 |  50 | sales       | pune      |
+| 108 | raju  |  12000 |  30 | operation   | mumbai    |
+| 108 | raju  |  12000 |  20 | testing     | chennai   |
+| 108 | raju  |  12000 |  10 | development | banglore  |
++-----+-------+--------+-----+-------------+-----------+
+32 rows in set (0.00 sec)
+
+mysql> select eid,ename,salary,d.dno,dname,location from employee e cross join dept d where e.dno=d.dno;
++-----+-------+--------+-----+-------------+-----------+
+| eid | ename | salary | dno | dname       | location  |
++-----+-------+--------+-----+-------------+-----------+
+| 101 | king  |  50000 |  30 | operation   | mumbai    |
+| 102 | sam   |  35000 |  10 | development | banglore  |
+| 103 | ford  |  32000 |  20 | testing     | chennai   |
+| 104 | tom   |  28000 |  10 | development | banglore  |
+| 105 | adam  |  27000 |  10 | development | banglore  |
+| 106 | jerry |  25000 |  20 | testing     | chennai   |
+| 107 | scott |  24000 |  20 | testing     | chennai   |
+| 108 | raju  |  12000 |  40 | marketing   | hyderabad |
++-----+-------+--------+-----+-------------+-----------+
+8 rows in set (0.00 sec)
+
+mysql> select eid,ename,salary,d.dno,dname,location from employee e natural join dept d;
++-----+-------+--------+-----+-------------+-----------+
+| eid | ename | salary | dno | dname       | location  |
++-----+-------+--------+-----+-------------+-----------+
+| 101 | king  |  50000 |  30 | operation   | mumbai    |
+| 102 | sam   |  35000 |  10 | development | banglore  |
+| 103 | ford  |  32000 |  20 | testing     | chennai   |
+| 104 | tom   |  28000 |  10 | development | banglore  |
+| 105 | adam  |  27000 |  10 | development | banglore  |
+| 106 | jerry |  25000 |  20 | testing     | chennai   |
+| 107 | scott |  24000 |  20 | testing     | chennai   |
+| 108 | raju  |  12000 |  40 | marketing   | hyderabad |
++-----+-------+--------+-----+-------------+-----------+
+8 rows in set (0.00 sec)
+
+mysql> select eid,ename,salary,job,d.dno,dname,location from employee e left outer join dept d on e.dno=d.dno;
++-----+--------+--------+-----------+------+-------------+-----------+
+| eid | ename  | salary | job       | dno  | dname       | location  |
++-----+--------+--------+-----------+------+-------------+-----------+
+| 101 | king   |  50000 | president |   30 | operation   | mumbai    |
+| 102 | sam    |  35000 | manager   |   10 | development | banglore  |
+| 103 | ford   |  32000 | manager   |   20 | testing     | chennai   |
+| 104 | tom    |  28000 | developer |   10 | development | banglore  |
+| 105 | adam   |  27000 | developer |   10 | development | banglore  |
+| 106 | jerry  |  25000 | tester    |   20 | testing     | chennai   |
+| 107 | scott  |  24000 | tester    |   20 | testing     | chennai   |
+| 108 | raju   |  12000 | clerk     |   40 | marketing   | hyderabad |
+| 109 | javeed |  29000 | NULL      | NULL | NULL        | NULL      |
++-----+--------+--------+-----------+------+-------------+-----------+
+9 rows in set (0.00 sec)
+
+mysql> select d.dno,d,dname,eid,ename from employee e,dept d right outer join on d.dno=e.dno;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'on d.dno=e.dno' at line 1
+mysql> select d.dno,d.dname,eid,ename from employee e,dept d right outer join on d.dno=e.dno;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'on d.dno=e.dno' at line 1
+mysql> select d.dno,d.dname,eid,ename from employee e right outer join dept d on d.dno=e.dno;
++-----+-------------+------+-------+
+| dno | dname       | eid  | ename |
++-----+-------------+------+-------+
+|  10 | development |  105 | adam  |
+|  10 | development |  104 | tom   |
+|  10 | development |  102 | sam   |
+|  20 | testing     |  107 | scott |
+|  20 | testing     |  106 | jerry |
+|  20 | testing     |  103 | ford  |
+|  30 | operation   |  101 | king  |
+|  40 | marketing   |  108 | raju  |
+|  50 | sales       | NULL | NULL  |
++-----+-------------+------+-------+
+9 rows in set (0.00 sec)
+
+mysql> use madhuri;
+Database changed
+mysql> select * from madhu;
++-----+-------+-------+------------+------+
+| sid | sname | marks | doj        | city |
++-----+-------+-------+------------+------+
+|  21 | ram   |   530 | 2023-07-12 | hyd  |
+|  22 | mani  |   590 | 2023-07-02 | hyd  |
+|  23 | nani  |   560 | 2023-03-23 | elr  |
+|  24 | sam   |   580 | 2022-04-23 | bng  |
+|  25 | sanju |   520 | 2023-02-03 | bng  |
++-----+-------+-------+------------+------+
+5 rows in set (0.00 sec)
+
+mysql> select m.sid,m.sname,s.marks,s.city from madhu m selfjoin madhu s where m.sid=s.mid;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'selfjoin madhu s where m.sid=s.mid' at line 1
+mysql> select m.sid,m.sname,s.marks,s.city from madhu m self join madhu s where m.sid=s.mid;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'self join madhu s where m.sid=s.mid' at line 1
+mysql> select m.sid,m.sname,s.marks,s.city from madhu m ,madhu s where m.sid=s.mid;
+ERROR 1054 (42S22): Unknown column 's.mid' in 'where clause'
+mysql> select m.sid,m.sname,s.marks,s.city from madhu m ,madhu s where m.sid=s.sid;
++-----+-------+-------+------+
+| sid | sname | marks | city |
++-----+-------+-------+------+
+|  21 | ram   |   530 | hyd  |
+|  22 | mani  |   590 | hyd  |
+|  23 | nani  |   560 | elr  |
+|  24 | sam   |   580 | bng  |
+|  25 | sanju |   520 | bng  |
++-----+-------+-------+------+
+5 rows in set (0.00 sec)
+
+mysql> select city from madhu where city='elr';
++------+
+| city |
++------+
+| elr  |
++------+
+1 row in set (0.00 sec)
+
+mysql> select marks from madhu where city='elr';
++-------+
+| marks |
++-------+
+|   560 |
++-------+
+1 row in set (0.00 sec)
+
+mysql> select sid where marks>(select marks from madhu where city='elr');
+ERROR 1054 (42S22): Unknown column 'sid' in 'field list'
+mysql> select sid from madhu where marks>(select marks from madhu where city='elr');
++-----+
+| sid |
++-----+
+|  22 |
+|  24 |
++-----+
+2 rows in set (0.00 sec)
+
+mysql> select sid,marks from madhu where marks>(select marks from madhu where city IN('elr','hyd');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> select sid,marks from  where marks>(select marks from madhu where city IN('elr','hyd')madhu;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where marks>(select marks from madhu where city IN('elr','hyd')madhu' at line 1
+mysql> select sid,marks from  where marks>(select marks from madhu where city IN('elr','hyd'))madhu;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where marks>(select marks from madhu where city IN('elr','hyd'))madhu' at line 1
+mysql> select sid,marks from madhu where marks>(select marks from madhu where city IN('elr','hyd'));
+ERROR 1242 (21000): Subquery returns more than 1 row
+mysql>
+mysql> select sid,marks from madhu where mark=(select marks from madhu where city IN('elr','hyd'));
+ERROR 1054 (42S22): Unknown column 'mark' in 'where clause'
+mysql> select sid,marks from madhu where mark like (select marks from madhu where city IN('elr','hyd'));
+ERROR 1054 (42S22): Unknown column 'mark' in 'where clause'
+mysql> select sid from madhu where marks>(select marks from madhu where city='elr');
++-----+
+| sid |
++-----+
+|  22 |
+|  24 |
++-----+
+2 rows in set (0.00 sec)
+
+mysql> create view madhu_info as select * from madhu;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> desc madhu_info;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| sid   | int         | NO   |     | NULL    |       |
+| sname | varchar(50) | YES  |     | NULL    |       |
+| marks | int         | YES  |     | NULL    |       |
+| doj   | date        | YES  |     | NULL    |       |
+| city  | varchar(45) | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+mysql> use madhuri
+Database changed
+mysql> show tables;
+Empty set (0.00 sec)
+
+mysql> use madhuri;
+Database changed
+mysql> show tables;
++-------------------+
+| Tables_in_madhuri |
++-------------------+
+| madhu             |
+| raju              |
++-------------------+
+2 rows in set (0.00 sec)
+
+mysql> desc madhu
+    -> \c
+mysql> desc madhu;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| sid   | int         | NO   | PRI | NULL    |       |
+| sname | varchar(45) | YES  |     | NULL    |       |
+| marks | int         | YES  |     | NULL    |       |
+| doj   | date        | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> desc raju;
++--------+---------------+------+-----+---------+-------+
+| Field  | Type          | Null | Key | Default | Extra |
++--------+---------------+------+-----+---------+-------+
+| eid    | int           | NO   | PRI | NULL    |       |
+| ename  | varchar(45)   | YES  |     | NULL    |       |
+| salary | decimal(10,0) | YES  |     | NULL    |       |
+| doj    | date          | YES  |     | NULL    |       |
++--------+---------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> insert into madhu values(21,'ram',530,'2023-07-12');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> desc madhu;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| sid   | int         | NO   | PRI | NULL    |       |
+| sname | varchar(45) | YES  |     | NULL    |       |
+| marks | int         | YES  |     | NULL    |       |
+| doj   | date        | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> select * from madhu;
++-----+-------+-------+------------+
+| sid | sname | marks | doj        |
++-----+-------+-------+------------+
+|  21 | ram   |   530 | 2023-07-12 |
++-----+-------+-------+------------+
+1 row in set (0.00 sec)
+
+mysql> insert into madhu values(22,'mani',530,'2023-87-52');
+ERROR 1292 (22007): Incorrect date value: '2023-87-52' for column 'doj' at row 1
+mysql> insert into madhu values(22,'mani',530,'2023-07-2');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into madhu values(23,'nani',560,'2023-03-23');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into madhu values(24,'sam',580,'2022-04-23');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into madhu values(25,'sanju',520,'2023-02-3');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> select * from madhu;
++-----+-------+-------+------------+
+| sid | sname | marks | doj        |
++-----+-------+-------+------------+
+|  21 | ram   |   530 | 2023-07-12 |
+|  22 | mani  |   530 | 2023-07-02 |
+|  23 | nani  |   560 | 2023-03-23 |
+|  24 | sam   |   580 | 2022-04-23 |
+|  25 | sanju |   520 | 2023-02-03 |
++-----+-------+-------+------------+
+5 rows in set (0.00 sec)
+
+mysql> desc raju;
++--------+---------------+------+-----+---------+-------+
+| Field  | Type          | Null | Key | Default | Extra |
++--------+---------------+------+-----+---------+-------+
+| eid    | int           | NO   | PRI | NULL    |       |
+| ename  | varchar(45)   | YES  |     | NULL    |       |
+| salary | decimal(10,0) | YES  |     | NULL    |       |
+| doj    | date          | YES  |     | NULL    |       |
++--------+---------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> alter table madhu modify ename varchar(50);
+ERROR 1054 (42S22): Unknown column 'ename' in 'madhu'
+mysql> alter table madhu modify sname varchar(50);
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc madhu;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| sid   | int         | NO   | PRI | NULL    |       |
+| sname | varchar(50) | YES  |     | NULL    |       |
+| marks | int         | YES  |     | NULL    |       |
+| doj   | date        | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> alter table madhu modify add(city(varchar(45));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'add(city(varchar(45))' at line 1
+mysql> alter table madhu  add(city(varchar(45));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(varchar(45))' at line 1
+mysql> alter table madhu  add(city Varchar(45));
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table raju column eid;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'column eid' at line 1
+mysql> alter table raju  drop column eid;
+Query OK, 0 rows affected (0.04 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table raju  add(eid int);
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> update madhu set sid=22 where marks=590;
+Query OK, 0 rows affected (0.00 sec)
+Rows matched: 0  Changed: 0  Warnings: 0
+
+mysql> select * from madhu;
++-----+-------+-------+------------+------+
+| sid | sname | marks | doj        | city |
++-----+-------+-------+------------+------+
+|  21 | ram   |   530 | 2023-07-12 | NULL |
+|  22 | mani  |   530 | 2023-07-02 | NULL |
+|  23 | nani  |   560 | 2023-03-23 | NULL |
+|  24 | sam   |   580 | 2022-04-23 | NULL |
+|  25 | sanju |   520 | 2023-02-03 | NULL |
++-----+-------+-------+------------+------+
+5 rows in set (0.00 sec)
+
+mysql> update madhu set marks=590  where sid=22;
+Query OK, 1 row affected (0.03 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from madhu;
++-----+-------+-------+------------+------+
+| sid | sname | marks | doj        | city |
++-----+-------+-------+------------+------+
+|  21 | ram   |   530 | 2023-07-12 | NULL |
+|  22 | mani  |   590 | 2023-07-02 | NULL |
+|  23 | nani  |   560 | 2023-03-23 | NULL |
+|  24 | sam   |   580 | 2022-04-23 | NULL |
+|  25 | sanju |   520 | 2023-02-03 | NULL |
++-----+-------+-------+------------+------+
+5 rows in set (0.00 sec)
+
+mysql> select sid,sname from madhu where sid>23;
++-----+-------+
+| sid | sname |
++-----+-------+
+|  24 | sam   |
+|  25 | sanju |
++-----+-------+
+2 rows in set (0.00 sec)
+
+mysql> select * from madhu where marks between 530 and 580;
++-----+-------+-------+------------+------+
+| sid | sname | marks | doj        | city |
++-----+-------+-------+------------+------+
+|  21 | ram   |   530 | 2023-07-12 | NULL |
+|  23 | nani  |   560 | 2023-03-23 | NULL |
+|  24 | sam   |   580 | 2022-04-23 | NULL |
++-----+-------+-------+------------+------+
+3 rows in set (0.00 sec)
+
+mysql> select * from madhu where sname like 's%';
++-----+-------+-------+------------+------+
+| sid | sname | marks | doj        | city |
++-----+-------+-------+------------+------+
+|  24 | sam   |   580 | 2022-04-23 | NULL |
+|  25 | sanju |   520 | 2023-02-03 | NULL |
++-----+-------+-------+------------+------+
+2 rows in set (0.00 sec)
+
+mysql> select * from madhu where sname like '%m';
++-----+-------+-------+------------+------+
+| sid | sname | marks | doj        | city |
++-----+-------+-------+------------+------+
+|  21 | ram   |   530 | 2023-07-12 | NULL |
+|  24 | sam   |   580 | 2022-04-23 | NULL |
++-----+-------+-------+------------+------+
+2 rows in set (0.00 sec)
+
+mysql> select sum(marks) from madhu;
++------------+
+| sum(marks) |
++------------+
+|       2780 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select max(marks) from madhu;
++------------+
+| max(marks) |
++------------+
+|        590 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select min(marks) from madhu;
++------------+
+| min(marks) |
++------------+
+|        520 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select min(doj) from madhu;
++------------+
+| min(doj)   |
++------------+
+| 2022-04-23 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> update madhu set city='hyd' where sid>23;
+Query OK, 2 rows affected (0.01 sec)
+Rows matched: 2  Changed: 2  Warnings: 0
+
+mysql> select * from madhu;
++-----+-------+-------+------------+------+
+| sid | sname | marks | doj        | city |
++-----+-------+-------+------------+------+
+|  21 | ram   |   530 | 2023-07-12 | NULL |
+|  22 | mani  |   590 | 2023-07-02 | NULL |
+|  23 | nani  |   560 | 2023-03-23 | NULL |
+|  24 | sam   |   580 | 2022-04-23 | hyd  |
+|  25 | sanju |   520 | 2023-02-03 | hyd  |
++-----+-------+-------+------------+------+
+5 rows in set (0.00 sec)
+
+mysql> update madhu set city='bng' where sid>22;
+Query OK, 3 rows affected (0.03 sec)
+Rows matched: 3  Changed: 3  Warnings: 0
+
+mysql> update madhu set city='hyd' where sid=22;
+Query OK, 1 row affected (0.03 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from madhu;
++-----+-------+-------+------------+------+
+| sid | sname | marks | doj        | city |
++-----+-------+-------+------------+------+
+|  21 | ram   |   530 | 2023-07-12 | NULL |
+|  22 | mani  |   590 | 2023-07-02 | hyd  |
+|  23 | nani  |   560 | 2023-03-23 | bng  |
+|  24 | sam   |   580 | 2022-04-23 | bng  |
+|  25 | sanju |   520 | 2023-02-03 | bng  |
++-----+-------+-------+------------+------+
+5 rows in set (0.00 sec)
+
+mysql> update madhu set city='hyd' where sid=21;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update madhu set city='elr'where sid=23;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from madhu;
++-----+-------+-------+------------+------+
+| sid | sname | marks | doj        | city |
++-----+-------+-------+------------+------+
+|  21 | ram   |   530 | 2023-07-12 | hyd  |
+|  22 | mani  |   590 | 2023-07-02 | hyd  |
+|  23 | nani  |   560 | 2023-03-23 | elr  |
+|  24 | sam   |   580 | 2022-04-23 | bng  |
+|  25 | sanju |   520 | 2023-02-03 | bng  |
++-----+-------+-------+------------+------+
+5 rows in set (0.00 sec)
+
+mysql> select sname,sum(marks) group by city;
+ERROR 1054 (42S22): Unknown column 'sname' in 'field list'
+mysql> select sname,sum(marks) from madhu group by city;
++-------+------------+
+| sname | sum(marks) |
++-------+------------+
+| ram   |       1120 |
+| nani  |        560 |
+| sam   |       1100 |
++-------+------------+
+3 rows in set (0.01 sec)
+
+mysql> select city,sum(marks) from madhu group by city;
++------+------------+
+| city | sum(marks) |
++------+------------+
+| hyd  |       1120 |
+| elr  |        560 |
+| bng  |       1100 |
++------+------------+
+3 rows in set (0.00 sec)
+
+mysql> select city,sum(marks) from madhu group by city having eid>23 order by city;
+ERROR 1054 (42S22): Unknown column 'eid' in 'having clause'
+mysql> select city,sum(marks) from madhu group by city having sid>23 order by city;
+ERROR 1054 (42S22): Unknown column 'sid' in 'having clause'
+mysql> select city,sum(marks) from madhu group by city having sid>23;
+ERROR 1054 (42S22): Unknown column 'sid' in 'having clause'
+mysql> select city,sum(marks) from madhu group by city having sid=23;
+ERROR 1054 (42S22): Unknown column 'sid' in 'having clause'
+mysql> select city,sum(marks) from madhu group by city order by city;
++------+------------+
+| city | sum(marks) |
++------+------------+
+| bng  |       1100 |
+| elr  |        560 |
+| hyd  |       1120 |
++------+------------+
+3 rows in set (0.00 sec)
+
+mysql> select * from raju;
+Empty set (0.00 sec)
+
+mysql> desc raju;
++--------+---------------+------+-----+---------+-------+
+| Field  | Type          | Null | Key | Default | Extra |
++--------+---------------+------+-----+---------+-------+
+| ename  | varchar(45)   | YES  |     | NULL    |       |
+| salary | decimal(10,0) | YES  |     | NULL    |       |
+| doj    | date          | YES  |     | NULL    |       |
+| eid    | int           | YES  |     | NULL    |       |
++--------+---------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> drop column eid from raju;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'column eid from raju' at line 1
+mysql> delete column coulmn="eid" from raju;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'column coulmn="eid" from raju' at line 1
+mysql> delete column coulmn="eid" from raju;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'column coulmn="eid" from raju' at line 1
+mysql> ^C
+mysql> \c
+mysql> CREATE TABLE Books
+    -> (
+    -> Id INT PRIMARY KEY IDENTITY(1,1),
+    -> Name VARCHAR (50) NOT NULL,
+    -> Price INT,
+    -> CategoryId INT,
+    -> AuthorId INT
+    -> )
+    -> \c
+mysql> CREATE TABLE Books
+    -> (
+    -> Id INT PRIMARY KEY IDENTITY(1,1),
+    -> Name VARCHAR (50) NOT NULL,
+    -> Price INT,
+    -> CategoryId INT,
+    -> AuthorId INT
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'IDENTITY(1,1),
+Name VARCHAR (50) NOT NULL,
+Price INT,
+CategoryId INT,
+AuthorId ' at line 3
+mysql> CREATE TABLE Books
+    -> (
+    -> Id INT PRIMARY KEY IDENTITY(1,1),
+    -> Name VARCHAR (50) NOT NULL,
+    -> Price INT,
+    -> CategoryId INT,
+    -> AuthorId INT
+    -> Id INT PRIMARY KEY IDENTITY(1,1),\
+    -> \c
+mysql> CREATE TABLE Books
+    -> (
+    -> Id INT PRIMARY KEY IDENTITY(1,1),
+    -> Name VARCHAR (50) NOT NULL,
+    -> Price INT,
+    -> CategoryId INT,
+    -> AuthorId INT
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'IDENTITY(1,1),
+Name VARCHAR (50) NOT NULL,
+Price INT,
+CategoryId INT,
+AuthorId ' at line 3
+mysql> use employee_db;
+Database changed
+mysql> select * from employee;
++-----+--------+--------+------+-----------+------------+------+------+
+| eid | ename  | salary | comm | job       | doj        | mid  | dno  |
++-----+--------+--------+------+-----------+------------+------+------+
+| 101 | king   |  50000 | NULL | president | 2020-10-21 | NULL |   30 |
+| 102 | sam    |  35000 | NULL | manager   | 2020-12-21 |  101 |   10 |
+| 103 | ford   |  32000 | NULL | manager   | 2020-11-01 |  101 |   20 |
+| 104 | tom    |  28000 |  900 | developer | 2021-06-29 |  102 |   10 |
+| 105 | adam   |  27000 | 1000 | developer | 2021-09-23 |  102 |   10 |
+| 106 | jerry  |  25000 | 3000 | tester    | 2021-05-15 |  103 |   20 |
+| 107 | scott  |  24000 | 3000 | tester    | 2021-05-15 |  103 |   20 |
+| 108 | raju   |  12000 |  500 | clerk     | 2023-10-19 |  101 |   40 |
+| 109 | javeed |  29000 | NULL | NULL      | NULL       | NULL | NULL |
++-----+--------+--------+------+-----------+------------+------+------+
+9 rows in set (0.00 sec)
+
+mysql> select * from dept;
++-----+-------------+-----------+
+| dno | dname       | location  |
++-----+-------------+-----------+
+|  10 | development | banglore  |
+|  20 | testing     | chennai   |
+|  30 | operation   | mumbai    |
+|  40 | marketing   | hyderabad |
+|  50 | sales       | pune      |
++-----+-------------+-----------+
+5 rows in set (0.00 sec)
+
+mysql> select eid,ename,salary,d.dno,dname,location from employee e,dept d where e.dno=d.dno;
++-----+-------+--------+-----+-------------+-----------+
+| eid | ename | salary | dno | dname       | location  |
++-----+-------+--------+-----+-------------+-----------+
+| 101 | king  |  50000 |  30 | operation   | mumbai    |
+| 102 | sam   |  35000 |  10 | development | banglore  |
+| 103 | ford  |  32000 |  20 | testing     | chennai   |
+| 104 | tom   |  28000 |  10 | development | banglore  |
+| 105 | adam  |  27000 |  10 | development | banglore  |
+| 106 | jerry |  25000 |  20 | testing     | chennai   |
+| 107 | scott |  24000 |  20 | testing     | chennai   |
+| 108 | raju  |  12000 |  40 | marketing   | hyderabad |
++-----+-------+--------+-----+-------------+-----------+
+8 rows in set (0.00 sec)
+
+mysql> select eid,ename,salary,d.dno,dname,location from employee e,dept d where e.dno!=d.dno;
++-----+-------+--------+-----+-------------+-----------+
+| eid | ename | salary | dno | dname       | location  |
++-----+-------+--------+-----+-------------+-----------+
+| 101 | king  |  50000 |  50 | sales       | pune      |
+| 101 | king  |  50000 |  40 | marketing   | hyderabad |
+| 101 | king  |  50000 |  20 | testing     | chennai   |
+| 101 | king  |  50000 |  10 | development | banglore  |
+| 102 | sam   |  35000 |  50 | sales       | pune      |
+| 102 | sam   |  35000 |  40 | marketing   | hyderabad |
+| 102 | sam   |  35000 |  30 | operation   | mumbai    |
+| 102 | sam   |  35000 |  20 | testing     | chennai   |
+| 103 | ford  |  32000 |  50 | sales       | pune      |
+| 103 | ford  |  32000 |  40 | marketing   | hyderabad |
+| 103 | ford  |  32000 |  30 | operation   | mumbai    |
+| 103 | ford  |  32000 |  10 | development | banglore  |
+| 104 | tom   |  28000 |  50 | sales       | pune      |
+| 104 | tom   |  28000 |  40 | marketing   | hyderabad |
+| 104 | tom   |  28000 |  30 | operation   | mumbai    |
+| 104 | tom   |  28000 |  20 | testing     | chennai   |
+| 105 | adam  |  27000 |  50 | sales       | pune      |
+| 105 | adam  |  27000 |  40 | marketing   | hyderabad |
+| 105 | adam  |  27000 |  30 | operation   | mumbai    |
+| 105 | adam  |  27000 |  20 | testing     | chennai   |
+| 106 | jerry |  25000 |  50 | sales       | pune      |
+| 106 | jerry |  25000 |  40 | marketing   | hyderabad |
+| 106 | jerry |  25000 |  30 | operation   | mumbai    |
+| 106 | jerry |  25000 |  10 | development | banglore  |
+| 107 | scott |  24000 |  50 | sales       | pune      |
+| 107 | scott |  24000 |  40 | marketing   | hyderabad |
+| 107 | scott |  24000 |  30 | operation   | mumbai    |
+| 107 | scott |  24000 |  10 | development | banglore  |
+| 108 | raju  |  12000 |  50 | sales       | pune      |
+| 108 | raju  |  12000 |  30 | operation   | mumbai    |
+| 108 | raju  |  12000 |  20 | testing     | chennai   |
+| 108 | raju  |  12000 |  10 | development | banglore  |
++-----+-------+--------+-----+-------------+-----------+
+32 rows in set (0.00 sec)
+
+mysql> select eid,ename,salary,d.dno,dname,location from employee e cross join dept d where e.dno=d.dno;
++-----+-------+--------+-----+-------------+-----------+
+| eid | ename | salary | dno | dname       | location  |
++-----+-------+--------+-----+-------------+-----------+
+| 101 | king  |  50000 |  30 | operation   | mumbai    |
+| 102 | sam   |  35000 |  10 | development | banglore  |
+| 103 | ford  |  32000 |  20 | testing     | chennai   |
+| 104 | tom   |  28000 |  10 | development | banglore  |
+| 105 | adam  |  27000 |  10 | development | banglore  |
+| 106 | jerry |  25000 |  20 | testing     | chennai   |
+| 107 | scott |  24000 |  20 | testing     | chennai   |
+| 108 | raju  |  12000 |  40 | marketing   | hyderabad |
++-----+-------+--------+-----+-------------+-----------+
+8 rows in set (0.00 sec)
+
+mysql> select eid,ename,salary,d.dno,dname,location from employee e natural join dept d;
++-----+-------+--------+-----+-------------+-----------+
+| eid | ename | salary | dno | dname       | location  |
++-----+-------+--------+-----+-------------+-----------+
+| 101 | king  |  50000 |  30 | operation   | mumbai    |
+| 102 | sam   |  35000 |  10 | development | banglore  |
+| 103 | ford  |  32000 |  20 | testing     | chennai   |
+| 104 | tom   |  28000 |  10 | development | banglore  |
+| 105 | adam  |  27000 |  10 | development | banglore  |
+| 106 | jerry |  25000 |  20 | testing     | chennai   |
+| 107 | scott |  24000 |  20 | testing     | chennai   |
+| 108 | raju  |  12000 |  40 | marketing   | hyderabad |
++-----+-------+--------+-----+-------------+-----------+
+8 rows in set (0.00 sec)
+
+mysql> select eid,ename,salary,job,d.dno,dname,location from employee e left outer join dept d on e.dno=d.dno;
++-----+--------+--------+-----------+------+-------------+-----------+
+| eid | ename  | salary | job       | dno  | dname       | location  |
++-----+--------+--------+-----------+------+-------------+-----------+
+| 101 | king   |  50000 | president |   30 | operation   | mumbai    |
+| 102 | sam    |  35000 | manager   |   10 | development | banglore  |
+| 103 | ford   |  32000 | manager   |   20 | testing     | chennai   |
+| 104 | tom    |  28000 | developer |   10 | development | banglore  |
+| 105 | adam   |  27000 | developer |   10 | development | banglore  |
+| 106 | jerry  |  25000 | tester    |   20 | testing     | chennai   |
+| 107 | scott  |  24000 | tester    |   20 | testing     | chennai   |
+| 108 | raju   |  12000 | clerk     |   40 | marketing   | hyderabad |
+| 109 | javeed |  29000 | NULL      | NULL | NULL        | NULL      |
++-----+--------+--------+-----------+------+-------------+-----------+
+9 rows in set (0.00 sec)
+
+mysql> select d.dno,d,dname,eid,ename from employee e,dept d right outer join on d.dno=e.dno;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'on d.dno=e.dno' at line 1
+mysql> select d.dno,d.dname,eid,ename from employee e,dept d right outer join on d.dno=e.dno;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'on d.dno=e.dno' at line 1
+mysql> select d.dno,d.dname,eid,ename from employee e right outer join dept d on d.dno=e.dno;
++-----+-------------+------+-------+
+| dno | dname       | eid  | ename |
++-----+-------------+------+-------+
+|  10 | development |  105 | adam  |
+|  10 | development |  104 | tom   |
+|  10 | development |  102 | sam   |
+|  20 | testing     |  107 | scott |
+|  20 | testing     |  106 | jerry |
+|  20 | testing     |  103 | ford  |
+|  30 | operation   |  101 | king  |
+|  40 | marketing   |  108 | raju  |
+|  50 | sales       | NULL | NULL  |
++-----+-------------+------+-------+
+9 rows in set (0.00 sec)
+
+mysql> use madhuri;
+Database changed
+mysql> select * from madhu;
++-----+-------+-------+------------+------+
+| sid | sname | marks | doj        | city |
++-----+-------+-------+------------+------+
+|  21 | ram   |   530 | 2023-07-12 | hyd  |
+|  22 | mani  |   590 | 2023-07-02 | hyd  |
+|  23 | nani  |   560 | 2023-03-23 | elr  |
+|  24 | sam   |   580 | 2022-04-23 | bng  |
+|  25 | sanju |   520 | 2023-02-03 | bng  |
++-----+-------+-------+------------+------+
+5 rows in set (0.00 sec)
+
+mysql> select m.sid,m.sname,s.marks,s.city from madhu m selfjoin madhu s where m.sid=s.mid;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'selfjoin madhu s where m.sid=s.mid' at line 1
+mysql> select m.sid,m.sname,s.marks,s.city from madhu m self join madhu s where m.sid=s.mid;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'self join madhu s where m.sid=s.mid' at line 1
+mysql> select m.sid,m.sname,s.marks,s.city from madhu m ,madhu s where m.sid=s.mid;
+ERROR 1054 (42S22): Unknown column 's.mid' in 'where clause'
+mysql> select m.sid,m.sname,s.marks,s.city from madhu m ,madhu s where m.sid=s.sid;
++-----+-------+-------+------+
+| sid | sname | marks | city |
++-----+-------+-------+------+
+|  21 | ram   |   530 | hyd  |
+|  22 | mani  |   590 | hyd  |
+|  23 | nani  |   560 | elr  |
+|  24 | sam   |   580 | bng  |
+|  25 | sanju |   520 | bng  |
++-----+-------+-------+------+
+5 rows in set (0.00 sec)
+
+mysql> select city from madhu where city='elr';
++------+
+| city |
++------+
+| elr  |
++------+
+1 row in set (0.00 sec)
+
+mysql> select marks from madhu where city='elr';
++-------+
+| marks |
++-------+
+|   560 |
++-------+
+1 row in set (0.00 sec)
+
+mysql> select sid where marks>(select marks from madhu where city='elr');
+ERROR 1054 (42S22): Unknown column 'sid' in 'field list'
+mysql> select sid from madhu where marks>(select marks from madhu where city='elr');
++-----+
+| sid |
++-----+
+|  22 |
+|  24 |
++-----+
+2 rows in set (0.00 sec)
+
+mysql> select sid,marks from madhu where marks>(select marks from madhu where city IN('elr','hyd');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> select sid,marks from  where marks>(select marks from madhu where city IN('elr','hyd')madhu;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where marks>(select marks from madhu where city IN('elr','hyd')madhu' at line 1
+mysql> select sid,marks from  where marks>(select marks from madhu where city IN('elr','hyd'))madhu;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where marks>(select marks from madhu where city IN('elr','hyd'))madhu' at line 1
+mysql> select sid,marks from madhu where marks>(select marks from madhu where city IN('elr','hyd'));
+ERROR 1242 (21000): Subquery returns more than 1 row
+mysql>
+mysql> select sid,marks from madhu where mark=(select marks from madhu where city IN('elr','hyd'));
+ERROR 1054 (42S22): Unknown column 'mark' in 'where clause'
+mysql> select sid,marks from madhu where mark like (select marks from madhu where city IN('elr','hyd'));
+ERROR 1054 (42S22): Unknown column 'mark' in 'where clause'
+mysql> select sid from madhu where marks>(select marks from madhu where city='elr');
++-----+
+| sid |
++-----+
+|  22 |
+|  24 |
++-----+
+2 rows in set (0.00 sec)
+
+mysql> create view madhu_info as select * from madhu;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> desc madhu_info;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| sid   | int         | NO   |     | NULL    |       |
+| sname | varchar(50) | YES  |     | NULL    |       |
+| marks | int         | YES  |     | NULL    |       |
+| doj   | date        | YES  |     | NULL    |       |
+| city  | varchar(45) | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+mysql> use madhuri
+Database changed
+mysql> show tables;
+Empty set (0.00 sec)
+
+mysql> use madhuri;
+Database changed
+mysql> show tables;
++-------------------+
+| Tables_in_madhuri |
++-------------------+
+| madhu             |
+| raju              |
++-------------------+
+2 rows in set (0.00 sec)
+
+mysql> desc madhu
+    -> \c
+mysql> desc madhu;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| sid   | int         | NO   | PRI | NULL    |       |
+| sname | varchar(45) | YES  |     | NULL    |       |
+| marks | int         | YES  |     | NULL    |       |
+| doj   | date        | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> desc raju;
++--------+---------------+------+-----+---------+-------+
+| Field  | Type          | Null | Key | Default | Extra |
++--------+---------------+------+-----+---------+-------+
+| eid    | int           | NO   | PRI | NULL    |       |
+| ename  | varchar(45)   | YES  |     | NULL    |       |
+| salary | decimal(10,0) | YES  |     | NULL    |       |
+| doj    | date          | YES  |     | NULL    |       |
++--------+---------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> insert into madhu values(21,'ram',530,'2023-07-12');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> desc madhu;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| sid   | int         | NO   | PRI | NULL    |       |
+| sname | varchar(45) | YES  |     | NULL    |       |
+| marks | int         | YES  |     | NULL    |       |
+| doj   | date        | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> select * from madhu;
++-----+-------+-------+------------+
+| sid | sname | marks | doj        |
++-----+-------+-------+------------+
+|  21 | ram   |   530 | 2023-07-12 |
++-----+-------+-------+------------+
+1 row in set (0.00 sec)
+
+mysql> insert into madhu values(22,'mani',530,'2023-87-52');
+ERROR 1292 (22007): Incorrect date value: '2023-87-52' for column 'doj' at row 1
+mysql> insert into madhu values(22,'mani',530,'2023-07-2');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into madhu values(23,'nani',560,'2023-03-23');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into madhu values(24,'sam',580,'2022-04-23');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into madhu values(25,'sanju',520,'2023-02-3');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> select * from madhu;
++-----+-------+-------+------------+
+| sid | sname | marks | doj        |
++-----+-------+-------+------------+
+|  21 | ram   |   530 | 2023-07-12 |
+|  22 | mani  |   530 | 2023-07-02 |
+|  23 | nani  |   560 | 2023-03-23 |
+|  24 | sam   |   580 | 2022-04-23 |
+|  25 | sanju |   520 | 2023-02-03 |
++-----+-------+-------+------------+
+5 rows in set (0.00 sec)
+
+mysql> desc raju;
++--------+---------------+------+-----+---------+-------+
+| Field  | Type          | Null | Key | Default | Extra |
++--------+---------------+------+-----+---------+-------+
+| eid    | int           | NO   | PRI | NULL    |       |
+| ename  | varchar(45)   | YES  |     | NULL    |       |
+| salary | decimal(10,0) | YES  |     | NULL    |       |
+| doj    | date          | YES  |     | NULL    |       |
++--------+---------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> alter table madhu modify ename varchar(50);
+ERROR 1054 (42S22): Unknown column 'ename' in 'madhu'
+mysql> alter table madhu modify sname varchar(50);
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc madhu;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| sid   | int         | NO   | PRI | NULL    |       |
+| sname | varchar(50) | YES  |     | NULL    |       |
+| marks | int         | YES  |     | NULL    |       |
+| doj   | date        | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> alter table madhu modify add(city(varchar(45));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'add(city(varchar(45))' at line 1
+mysql> alter table madhu  add(city(varchar(45));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(varchar(45))' at line 1
+mysql> alter table madhu  add(city Varchar(45));
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table raju column eid;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'column eid' at line 1
+mysql> alter table raju  drop column eid;
+Query OK, 0 rows affected (0.04 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table raju  add(eid int);
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> update madhu set sid=22 where marks=590;
+Query OK, 0 rows affected (0.00 sec)
+Rows matched: 0  Changed: 0  Warnings: 0
+
+mysql> select * from madhu;
++-----+-------+-------+------------+------+
+| sid | sname | marks | doj        | city |
++-----+-------+-------+------------+------+
+|  21 | ram   |   530 | 2023-07-12 | NULL |
+|  22 | mani  |   530 | 2023-07-02 | NULL |
+|  23 | nani  |   560 | 2023-03-23 | NULL |
+|  24 | sam   |   580 | 2022-04-23 | NULL |
+|  25 | sanju |   520 | 2023-02-03 | NULL |
++-----+-------+-------+------------+------+
+5 rows in set (0.00 sec)
+
+mysql> update madhu set marks=590  where sid=22;
+Query OK, 1 row affected (0.03 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from madhu;
++-----+-------+-------+------------+------+
+| sid | sname | marks | doj        | city |
++-----+-------+-------+------------+------+
+|  21 | ram   |   530 | 2023-07-12 | NULL |
+|  22 | mani  |   590 | 2023-07-02 | NULL |
+|  23 | nani  |   560 | 2023-03-23 | NULL |
+|  24 | sam   |   580 | 2022-04-23 | NULL |
+|  25 | sanju |   520 | 2023-02-03 | NULL |
++-----+-------+-------+------------+------+
+5 rows in set (0.00 sec)
+
+mysql> select sid,sname from madhu where sid>23;
++-----+-------+
+| sid | sname |
++-----+-------+
+|  24 | sam   |
+|  25 | sanju |
++-----+-------+
+2 rows in set (0.00 sec)
+
+mysql> select * from madhu where marks between 530 and 580;
++-----+-------+-------+------------+------+
+| sid | sname | marks | doj        | city |
++-----+-------+-------+------------+------+
+|  21 | ram   |   530 | 2023-07-12 | NULL |
+|  23 | nani  |   560 | 2023-03-23 | NULL |
+|  24 | sam   |   580 | 2022-04-23 | NULL |
++-----+-------+-------+------------+------+
+3 rows in set (0.00 sec)
+
+mysql> select * from madhu where sname like 's%';
++-----+-------+-------+------------+------+
+| sid | sname | marks | doj        | city |
++-----+-------+-------+------------+------+
+|  24 | sam   |   580 | 2022-04-23 | NULL |
+|  25 | sanju |   520 | 2023-02-03 | NULL |
++-----+-------+-------+------------+------+
+2 rows in set (0.00 sec)
+
+mysql> select * from madhu where sname like '%m';
++-----+-------+-------+------------+------+
+| sid | sname | marks | doj        | city |
++-----+-------+-------+------------+------+
+|  21 | ram   |   530 | 2023-07-12 | NULL |
+|  24 | sam   |   580 | 2022-04-23 | NULL |
++-----+-------+-------+------------+------+
+2 rows in set (0.00 sec)
+
+mysql> select sum(marks) from madhu;
++------------+
+| sum(marks) |
++------------+
+|       2780 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select max(marks) from madhu;
++------------+
+| max(marks) |
++------------+
+|        590 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select min(marks) from madhu;
++------------+
+| min(marks) |
++------------+
+|        520 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select min(doj) from madhu;
++------------+
+| min(doj)   |
++------------+
+| 2022-04-23 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> update madhu set city='hyd' where sid>23;
+Query OK, 2 rows affected (0.01 sec)
+Rows matched: 2  Changed: 2  Warnings: 0
+
+mysql> select * from madhu;
++-----+-------+-------+------------+------+
+| sid | sname | marks | doj        | city |
++-----+-------+-------+------------+------+
+|  21 | ram   |   530 | 2023-07-12 | NULL |
+|  22 | mani  |   590 | 2023-07-02 | NULL |
+|  23 | nani  |   560 | 2023-03-23 | NULL |
+|  24 | sam   |   580 | 2022-04-23 | hyd  |
+|  25 | sanju |   520 | 2023-02-03 | hyd  |
++-----+-------+-------+------------+------+
+5 rows in set (0.00 sec)
+
+mysql> update madhu set city='bng' where sid>22;
+Query OK, 3 rows affected (0.03 sec)
+Rows matched: 3  Changed: 3  Warnings: 0
+
+mysql> update madhu set city='hyd' where sid=22;
+Query OK, 1 row affected (0.03 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from madhu;
++-----+-------+-------+------------+------+
+| sid | sname | marks | doj        | city |
++-----+-------+-------+------------+------+
+|  21 | ram   |   530 | 2023-07-12 | NULL |
+|  22 | mani  |   590 | 2023-07-02 | hyd  |
+|  23 | nani  |   560 | 2023-03-23 | bng  |
+|  24 | sam   |   580 | 2022-04-23 | bng  |
+|  25 | sanju |   520 | 2023-02-03 | bng  |
++-----+-------+-------+------------+------+
+5 rows in set (0.00 sec)
+
+mysql> update madhu set city='hyd' where sid=21;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update madhu set city='elr'where sid=23;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from madhu;
++-----+-------+-------+------------+------+
+| sid | sname | marks | doj        | city |
++-----+-------+-------+------------+------+
+|  21 | ram   |   530 | 2023-07-12 | hyd  |
+|  22 | mani  |   590 | 2023-07-02 | hyd  |
+|  23 | nani  |   560 | 2023-03-23 | elr  |
+|  24 | sam   |   580 | 2022-04-23 | bng  |
+|  25 | sanju |   520 | 2023-02-03 | bng  |
++-----+-------+-------+------------+------+
+5 rows in set (0.00 sec)
+
+mysql> select sname,sum(marks) group by city;
+ERROR 1054 (42S22): Unknown column 'sname' in 'field list'
+mysql> select sname,sum(marks) from madhu group by city;
++-------+------------+
+| sname | sum(marks) |
++-------+------------+
+| ram   |       1120 |
+| nani  |        560 |
+| sam   |       1100 |
++-------+------------+
+3 rows in set (0.01 sec)
+
+mysql> select city,sum(marks) from madhu group by city;
++------+------------+
+| city | sum(marks) |
++------+------------+
+| hyd  |       1120 |
+| elr  |        560 |
+| bng  |       1100 |
++------+------------+
+3 rows in set (0.00 sec)
+
+mysql> select city,sum(marks) from madhu group by city having eid>23 order by city;
+ERROR 1054 (42S22): Unknown column 'eid' in 'having clause'
+mysql> select city,sum(marks) from madhu group by city having sid>23 order by city;
+ERROR 1054 (42S22): Unknown column 'sid' in 'having clause'
+mysql> select city,sum(marks) from madhu group by city having sid>23;
+ERROR 1054 (42S22): Unknown column 'sid' in 'having clause'
+mysql> select city,sum(marks) from madhu group by city having sid=23;
+ERROR 1054 (42S22): Unknown column 'sid' in 'having clause'
+mysql> select city,sum(marks) from madhu group by city order by city;
++------+------------+
+| city | sum(marks) |
++------+------------+
+| bng  |       1100 |
+| elr  |        560 |
+| hyd  |       1120 |
++------+------------+
+3 rows in set (0.00 sec)
+
+mysql> select * from raju;
+Empty set (0.00 sec)
+
+mysql> desc raju;
++--------+---------------+------+-----+---------+-------+
+| Field  | Type          | Null | Key | Default | Extra |
++--------+---------------+------+-----+---------+-------+
+| ename  | varchar(45)   | YES  |     | NULL    |       |
+| salary | decimal(10,0) | YES  |     | NULL    |       |
+| doj    | date          | YES  |     | NULL    |       |
+| eid    | int           | YES  |     | NULL    |       |
++--------+---------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> drop column eid from raju;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'column eid from raju' at line 1
+mysql> delete column coulmn="eid" from raju;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'column coulmn="eid" from raju' at line 1
+mysql> delete column coulmn="eid" from raju;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'column coulmn="eid" from raju' at line 1
+mysql> ^C
+mysql> \c
+mysql> CREATE TABLE Books
+    -> (
+    -> Id INT PRIMARY KEY IDENTITY(1,1),
+    -> Name VARCHAR (50) NOT NULL,
+    -> Price INT,
+    -> CategoryId INT,
+    -> AuthorId INT
+    -> )
+    -> \c
+mysql> CREATE TABLE Books
+    -> (
+    -> Id INT PRIMARY KEY IDENTITY(1,1),
+    -> Name VARCHAR (50) NOT NULL,
+    -> Price INT,
+    -> CategoryId INT,
+    -> AuthorId INT
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'IDENTITY(1,1),
+Name VARCHAR (50) NOT NULL,
+Price INT,
+CategoryId INT,
+AuthorId ' at line 3
+mysql> CREATE TABLE Books
+    -> (
+    -> Id INT PRIMARY KEY IDENTITY(1,1),
+    -> Name VARCHAR (50) NOT NULL,
+    -> Price INT,
+    -> CategoryId INT,
+    -> AuthorId INT
+    -> Id INT PRIMARY KEY IDENTITY(1,1),\
+    -> \c
+mysql> CREATE TABLE Books
+    -> (
+    -> Id INT PRIMARY KEY IDENTITY(1,1),
+    -> Name VARCHAR (50) NOT NULL,
+    -> Price INT,
+    -> CategoryId INT,
+    -> AuthorId INT
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'IDENTITY(1,1),
+Name VARCHAR (50) NOT NULL,
+Price INT,
+CategoryId INT,
+AuthorId ' at line 3
+mysql> use employee_db;
+Database changed
+mysql> select * from employee;
++-----+--------+--------+------+-----------+------------+------+------+
+| eid | ename  | salary | comm | job       | doj        | mid  | dno  |
++-----+--------+--------+------+-----------+------------+------+------+
+| 101 | king   |  50000 | NULL | president | 2020-10-21 | NULL |   30 |
+| 102 | sam    |  35000 | NULL | manager   | 2020-12-21 |  101 |   10 |
+| 103 | ford   |  32000 | NULL | manager   | 2020-11-01 |  101 |   20 |
+| 104 | tom    |  28000 |  900 | developer | 2021-06-29 |  102 |   10 |
+| 105 | adam   |  27000 | 1000 | developer | 2021-09-23 |  102 |   10 |
+| 106 | jerry  |  25000 | 3000 | tester    | 2021-05-15 |  103 |   20 |
+| 107 | scott  |  24000 | 3000 | tester    | 2021-05-15 |  103 |   20 |
+| 108 | raju   |  12000 |  500 | clerk     | 2023-10-19 |  101 |   40 |
+| 109 | javeed |  29000 | NULL | NULL      | NULL       | NULL | NULL |
++-----+--------+--------+------+-----------+------------+------+------+
+9 rows in set (0.00 sec)
+
+mysql> select * from dept;
++-----+-------------+-----------+
+| dno | dname       | location  |
++-----+-------------+-----------+
+|  10 | development | banglore  |
+|  20 | testing     | chennai   |
+|  30 | operation   | mumbai    |
+|  40 | marketing   | hyderabad |
+|  50 | sales       | pune      |
++-----+-------------+-----------+
+5 rows in set (0.00 sec)
+
+mysql> select eid,ename,salary,d.dno,dname,location from employee e,dept d where e.dno=d.dno;
++-----+-------+--------+-----+-------------+-----------+
+| eid | ename | salary | dno | dname       | location  |
++-----+-------+--------+-----+-------------+-----------+
+| 101 | king  |  50000 |  30 | operation   | mumbai    |
+| 102 | sam   |  35000 |  10 | development | banglore  |
+| 103 | ford  |  32000 |  20 | testing     | chennai   |
+| 104 | tom   |  28000 |  10 | development | banglore  |
+| 105 | adam  |  27000 |  10 | development | banglore  |
+| 106 | jerry |  25000 |  20 | testing     | chennai   |
+| 107 | scott |  24000 |  20 | testing     | chennai   |
+| 108 | raju  |  12000 |  40 | marketing   | hyderabad |
++-----+-------+--------+-----+-------------+-----------+
+8 rows in set (0.00 sec)
+
+mysql> select eid,ename,salary,d.dno,dname,location from employee e,dept d where e.dno!=d.dno;
++-----+-------+--------+-----+-------------+-----------+
+| eid | ename | salary | dno | dname       | location  |
++-----+-------+--------+-----+-------------+-----------+
+| 101 | king  |  50000 |  50 | sales       | pune      |
+| 101 | king  |  50000 |  40 | marketing   | hyderabad |
+| 101 | king  |  50000 |  20 | testing     | chennai   |
+| 101 | king  |  50000 |  10 | development | banglore  |
+| 102 | sam   |  35000 |  50 | sales       | pune      |
+| 102 | sam   |  35000 |  40 | marketing   | hyderabad |
+| 102 | sam   |  35000 |  30 | operation   | mumbai    |
+| 102 | sam   |  35000 |  20 | testing     | chennai   |
+| 103 | ford  |  32000 |  50 | sales       | pune      |
+| 103 | ford  |  32000 |  40 | marketing   | hyderabad |
+| 103 | ford  |  32000 |  30 | operation   | mumbai    |
+| 103 | ford  |  32000 |  10 | development | banglore  |
+| 104 | tom   |  28000 |  50 | sales       | pune      |
+| 104 | tom   |  28000 |  40 | marketing   | hyderabad |
+| 104 | tom   |  28000 |  30 | operation   | mumbai    |
+| 104 | tom   |  28000 |  20 | testing     | chennai   |
+| 105 | adam  |  27000 |  50 | sales       | pune      |
+| 105 | adam  |  27000 |  40 | marketing   | hyderabad |
+| 105 | adam  |  27000 |  30 | operation   | mumbai    |
+| 105 | adam  |  27000 |  20 | testing     | chennai   |
+| 106 | jerry |  25000 |  50 | sales       | pune      |
+| 106 | jerry |  25000 |  40 | marketing   | hyderabad |
+| 106 | jerry |  25000 |  30 | operation   | mumbai    |
+| 106 | jerry |  25000 |  10 | development | banglore  |
+| 107 | scott |  24000 |  50 | sales       | pune      |
+| 107 | scott |  24000 |  40 | marketing   | hyderabad |
+| 107 | scott |  24000 |  30 | operation   | mumbai    |
+| 107 | scott |  24000 |  10 | development | banglore  |
+| 108 | raju  |  12000 |  50 | sales       | pune      |
+| 108 | raju  |  12000 |  30 | operation   | mumbai    |
+| 108 | raju  |  12000 |  20 | testing     | chennai   |
+| 108 | raju  |  12000 |  10 | development | banglore  |
++-----+-------+--------+-----+-------------+-----------+
+32 rows in set (0.00 sec)
+
+mysql> select eid,ename,salary,d.dno,dname,location from employee e cross join dept d where e.dno=d.dno;
++-----+-------+--------+-----+-------------+-----------+
+| eid | ename | salary | dno | dname       | location  |
++-----+-------+--------+-----+-------------+-----------+
+| 101 | king  |  50000 |  30 | operation   | mumbai    |
+| 102 | sam   |  35000 |  10 | development | banglore  |
+| 103 | ford  |  32000 |  20 | testing     | chennai   |
+| 104 | tom   |  28000 |  10 | development | banglore  |
+| 105 | adam  |  27000 |  10 | development | banglore  |
+| 106 | jerry |  25000 |  20 | testing     | chennai   |
+| 107 | scott |  24000 |  20 | testing     | chennai   |
+| 108 | raju  |  12000 |  40 | marketing   | hyderabad |
++-----+-------+--------+-----+-------------+-----------+
+8 rows in set (0.00 sec)
+
+mysql> select eid,ename,salary,d.dno,dname,location from employee e natural join dept d;
++-----+-------+--------+-----+-------------+-----------+
+| eid | ename | salary | dno | dname       | location  |
++-----+-------+--------+-----+-------------+-----------+
+| 101 | king  |  50000 |  30 | operation   | mumbai    |
+| 102 | sam   |  35000 |  10 | development | banglore  |
+| 103 | ford  |  32000 |  20 | testing     | chennai   |
+| 104 | tom   |  28000 |  10 | development | banglore  |
+| 105 | adam  |  27000 |  10 | development | banglore  |
+| 106 | jerry |  25000 |  20 | testing     | chennai   |
+| 107 | scott |  24000 |  20 | testing     | chennai   |
+| 108 | raju  |  12000 |  40 | marketing   | hyderabad |
++-----+-------+--------+-----+-------------+-----------+
+8 rows in set (0.00 sec)
+
+mysql> select eid,ename,salary,job,d.dno,dname,location from employee e left outer join dept d on e.dno=d.dno;
++-----+--------+--------+-----------+------+-------------+-----------+
+| eid | ename  | salary | job       | dno  | dname       | location  |
++-----+--------+--------+-----------+------+-------------+-----------+
+| 101 | king   |  50000 | president |   30 | operation   | mumbai    |
+| 102 | sam    |  35000 | manager   |   10 | development | banglore  |
+| 103 | ford   |  32000 | manager   |   20 | testing     | chennai   |
+| 104 | tom    |  28000 | developer |   10 | development | banglore  |
+| 105 | adam   |  27000 | developer |   10 | development | banglore  |
+| 106 | jerry  |  25000 | tester    |   20 | testing     | chennai   |
+| 107 | scott  |  24000 | tester    |   20 | testing     | chennai   |
+| 108 | raju   |  12000 | clerk     |   40 | marketing   | hyderabad |
+| 109 | javeed |  29000 | NULL      | NULL | NULL        | NULL      |
++-----+--------+--------+-----------+------+-------------+-----------+
+9 rows in set (0.00 sec)
+
+mysql> select d.dno,d,dname,eid,ename from employee e,dept d right outer join on d.dno=e.dno;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'on d.dno=e.dno' at line 1
+mysql> select d.dno,d.dname,eid,ename from employee e,dept d right outer join on d.dno=e.dno;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'on d.dno=e.dno' at line 1
+mysql> select d.dno,d.dname,eid,ename from employee e right outer join dept d on d.dno=e.dno;
++-----+-------------+------+-------+
+| dno | dname       | eid  | ename |
++-----+-------------+------+-------+
+|  10 | development |  105 | adam  |
+|  10 | development |  104 | tom   |
+|  10 | development |  102 | sam   |
+|  20 | testing     |  107 | scott |
+|  20 | testing     |  106 | jerry |
+|  20 | testing     |  103 | ford  |
+|  30 | operation   |  101 | king  |
+|  40 | marketing   |  108 | raju  |
+|  50 | sales       | NULL | NULL  |
++-----+-------------+------+-------+
+9 rows in set (0.00 sec)
+
+mysql> use madhuri;
+Database changed
+mysql> select * from madhu;
++-----+-------+-------+------------+------+
+| sid | sname | marks | doj        | city |
++-----+-------+-------+------------+------+
+|  21 | ram   |   530 | 2023-07-12 | hyd  |
+|  22 | mani  |   590 | 2023-07-02 | hyd  |
+|  23 | nani  |   560 | 2023-03-23 | elr  |
+|  24 | sam   |   580 | 2022-04-23 | bng  |
+|  25 | sanju |   520 | 2023-02-03 | bng  |
++-----+-------+-------+------------+------+
+5 rows in set (0.00 sec)
+
+mysql> select m.sid,m.sname,s.marks,s.city from madhu m selfjoin madhu s where m.sid=s.mid;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'selfjoin madhu s where m.sid=s.mid' at line 1
+mysql> select m.sid,m.sname,s.marks,s.city from madhu m self join madhu s where m.sid=s.mid;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'self join madhu s where m.sid=s.mid' at line 1
+mysql> select m.sid,m.sname,s.marks,s.city from madhu m ,madhu s where m.sid=s.mid;
+ERROR 1054 (42S22): Unknown column 's.mid' in 'where clause'
+mysql> select m.sid,m.sname,s.marks,s.city from madhu m ,madhu s where m.sid=s.sid;
++-----+-------+-------+------+
+| sid | sname | marks | city |
++-----+-------+-------+------+
+|  21 | ram   |   530 | hyd  |
+|  22 | mani  |   590 | hyd  |
+|  23 | nani  |   560 | elr  |
+|  24 | sam   |   580 | bng  |
+|  25 | sanju |   520 | bng  |
++-----+-------+-------+------+
+5 rows in set (0.00 sec)
+
+mysql> select city from madhu where city='elr';
++------+
+| city |
++------+
+| elr  |
++------+
+1 row in set (0.00 sec)
+
+mysql> select marks from madhu where city='elr';
++-------+
+| marks |
++-------+
+|   560 |
++-------+
+1 row in set (0.00 sec)
+
+mysql> select sid where marks>(select marks from madhu where city='elr');
+ERROR 1054 (42S22): Unknown column 'sid' in 'field list'
+mysql> select sid from madhu where marks>(select marks from madhu where city='elr');
++-----+
+| sid |
++-----+
+|  22 |
+|  24 |
++-----+
+2 rows in set (0.00 sec)
+
+mysql> select sid,marks from madhu where marks>(select marks from madhu where city IN('elr','hyd');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> select sid,marks from  where marks>(select marks from madhu where city IN('elr','hyd')madhu;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where marks>(select marks from madhu where city IN('elr','hyd')madhu' at line 1
+mysql> select sid,marks from  where marks>(select marks from madhu where city IN('elr','hyd'))madhu;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where marks>(select marks from madhu where city IN('elr','hyd'))madhu' at line 1
+mysql> select sid,marks from madhu where marks>(select marks from madhu where city IN('elr','hyd'));
+ERROR 1242 (21000): Subquery returns more than 1 row
+mysql>
+mysql> select sid,marks from madhu where mark=(select marks from madhu where city IN('elr','hyd'));
+ERROR 1054 (42S22): Unknown column 'mark' in 'where clause'
+mysql> select sid,marks from madhu where mark like (select marks from madhu where city IN('elr','hyd'));
+ERROR 1054 (42S22): Unknown column 'mark' in 'where clause'
+mysql> select sid from madhu where marks>(select marks from madhu where city='elr');
++-----+
+| sid |
++-----+
+|  22 |
+|  24 |
++-----+
+2 rows in set (0.00 sec)
+
+mysql> create view madhu_info as select * from madhu;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> desc madhu_info;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| sid   | int         | NO   |     | NULL    |       |
+| sname | varchar(50) | YES  |     | NULL    |       |
+| marks | int         | YES  |     | NULL    |       |
+| doj   | date        | YES  |     | NULL    |       |
+| city  | varchar(45) | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+mysql> use madhuri
+Database changed
+mysql> show tables;
+Empty set (0.00 sec)
+
+mysql> use madhuri;
+Database changed
+mysql> show tables;
++-------------------+
+| Tables_in_madhuri |
++-------------------+
+| madhu             |
+| raju              |
++-------------------+
+2 rows in set (0.00 sec)
+
+mysql> desc madhu
+    -> \c
+mysql> desc madhu;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| sid   | int         | NO   | PRI | NULL    |       |
+| sname | varchar(45) | YES  |     | NULL    |       |
+| marks | int         | YES  |     | NULL    |       |
+| doj   | date        | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> desc raju;
++--------+---------------+------+-----+---------+-------+
+| Field  | Type          | Null | Key | Default | Extra |
++--------+---------------+------+-----+---------+-------+
+| eid    | int           | NO   | PRI | NULL    |       |
+| ename  | varchar(45)   | YES  |     | NULL    |       |
+| salary | decimal(10,0) | YES  |     | NULL    |       |
+| doj    | date          | YES  |     | NULL    |       |
++--------+---------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> insert into madhu values(21,'ram',530,'2023-07-12');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> desc madhu;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| sid   | int         | NO   | PRI | NULL    |       |
+| sname | varchar(45) | YES  |     | NULL    |       |
+| marks | int         | YES  |     | NULL    |       |
+| doj   | date        | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> select * from madhu;
++-----+-------+-------+------------+
+| sid | sname | marks | doj        |
++-----+-------+-------+------------+
+|  21 | ram   |   530 | 2023-07-12 |
++-----+-------+-------+------------+
+1 row in set (0.00 sec)
+
+mysql> insert into madhu values(22,'mani',530,'2023-87-52');
+ERROR 1292 (22007): Incorrect date value: '2023-87-52' for column 'doj' at row 1
+mysql> insert into madhu values(22,'mani',530,'2023-07-2');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into madhu values(23,'nani',560,'2023-03-23');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into madhu values(24,'sam',580,'2022-04-23');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into madhu values(25,'sanju',520,'2023-02-3');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> select * from madhu;
++-----+-------+-------+------------+
+| sid | sname | marks | doj        |
++-----+-------+-------+------------+
+|  21 | ram   |   530 | 2023-07-12 |
+|  22 | mani  |   530 | 2023-07-02 |
+|  23 | nani  |   560 | 2023-03-23 |
+|  24 | sam   |   580 | 2022-04-23 |
+|  25 | sanju |   520 | 2023-02-03 |
++-----+-------+-------+------------+
+5 rows in set (0.00 sec)
+
+mysql> desc raju;
++--------+---------------+------+-----+---------+-------+
+| Field  | Type          | Null | Key | Default | Extra |
++--------+---------------+------+-----+---------+-------+
+| eid    | int           | NO   | PRI | NULL    |       |
+| ename  | varchar(45)   | YES  |     | NULL    |       |
+| salary | decimal(10,0) | YES  |     | NULL    |       |
+| doj    | date          | YES  |     | NULL    |       |
++--------+---------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> alter table madhu modify ename varchar(50);
+ERROR 1054 (42S22): Unknown column 'ename' in 'madhu'
+mysql> alter table madhu modify sname varchar(50);
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc madhu;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| sid   | int         | NO   | PRI | NULL    |       |
+| sname | varchar(50) | YES  |     | NULL    |       |
+| marks | int         | YES  |     | NULL    |       |
+| doj   | date        | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> alter table madhu modify add(city(varchar(45));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'add(city(varchar(45))' at line 1
+mysql> alter table madhu  add(city(varchar(45));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(varchar(45))' at line 1
+mysql> alter table madhu  add(city Varchar(45));
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table raju column eid;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'column eid' at line 1
+mysql> alter table raju  drop column eid;
+Query OK, 0 rows affected (0.04 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table raju  add(eid int);
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> update madhu set sid=22 where marks=590;
+Query OK, 0 rows affected (0.00 sec)
+Rows matched: 0  Changed: 0  Warnings: 0
+
+mysql> select * from madhu;
++-----+-------+-------+------------+------+
+| sid | sname | marks | doj        | city |
++-----+-------+-------+------------+------+
+|  21 | ram   |   530 | 2023-07-12 | NULL |
+|  22 | mani  |   530 | 2023-07-02 | NULL |
+|  23 | nani  |   560 | 2023-03-23 | NULL |
+|  24 | sam   |   580 | 2022-04-23 | NULL |
+|  25 | sanju |   520 | 2023-02-03 | NULL |
++-----+-------+-------+------------+------+
+5 rows in set (0.00 sec)
+
+mysql> update madhu set marks=590  where sid=22;
+Query OK, 1 row affected (0.03 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from madhu;
++-----+-------+-------+------------+------+
+| sid | sname | marks | doj        | city |
++-----+-------+-------+------------+------+
+|  21 | ram   |   530 | 2023-07-12 | NULL |
+|  22 | mani  |   590 | 2023-07-02 | NULL |
+|  23 | nani  |   560 | 2023-03-23 | NULL |
+|  24 | sam   |   580 | 2022-04-23 | NULL |
+|  25 | sanju |   520 | 2023-02-03 | NULL |
++-----+-------+-------+------------+------+
+5 rows in set (0.00 sec)
+
+mysql> select sid,sname from madhu where sid>23;
++-----+-------+
+| sid | sname |
++-----+-------+
+|  24 | sam   |
+|  25 | sanju |
++-----+-------+
+2 rows in set (0.00 sec)
+
+mysql> select * from madhu where marks between 530 and 580;
++-----+-------+-------+------------+------+
+| sid | sname | marks | doj        | city |
++-----+-------+-------+------------+------+
+|  21 | ram   |   530 | 2023-07-12 | NULL |
+|  23 | nani  |   560 | 2023-03-23 | NULL |
+|  24 | sam   |   580 | 2022-04-23 | NULL |
++-----+-------+-------+------------+------+
+3 rows in set (0.00 sec)
+
+mysql> select * from madhu where sname like 's%';
++-----+-------+-------+------------+------+
+| sid | sname | marks | doj        | city |
++-----+-------+-------+------------+------+
+|  24 | sam   |   580 | 2022-04-23 | NULL |
+|  25 | sanju |   520 | 2023-02-03 | NULL |
++-----+-------+-------+------------+------+
+2 rows in set (0.00 sec)
+
+mysql> select * from madhu where sname like '%m';
++-----+-------+-------+------------+------+
+| sid | sname | marks | doj        | city |
++-----+-------+-------+------------+------+
+|  21 | ram   |   530 | 2023-07-12 | NULL |
+|  24 | sam   |   580 | 2022-04-23 | NULL |
++-----+-------+-------+------------+------+
+2 rows in set (0.00 sec)
+
+mysql> select sum(marks) from madhu;
++------------+
+| sum(marks) |
++------------+
+|       2780 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select max(marks) from madhu;
++------------+
+| max(marks) |
++------------+
+|        590 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select min(marks) from madhu;
++------------+
+| min(marks) |
++------------+
+|        520 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select min(doj) from madhu;
++------------+
+| min(doj)   |
++------------+
+| 2022-04-23 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> update madhu set city='hyd' where sid>23;
+Query OK, 2 rows affected (0.01 sec)
+Rows matched: 2  Changed: 2  Warnings: 0
+
+mysql> select * from madhu;
++-----+-------+-------+------------+------+
+| sid | sname | marks | doj        | city |
++-----+-------+-------+------------+------+
+|  21 | ram   |   530 | 2023-07-12 | NULL |
+|  22 | mani  |   590 | 2023-07-02 | NULL |
+|  23 | nani  |   560 | 2023-03-23 | NULL |
+|  24 | sam   |   580 | 2022-04-23 | hyd  |
+|  25 | sanju |   520 | 2023-02-03 | hyd  |
++-----+-------+-------+------------+------+
+5 rows in set (0.00 sec)
+
+mysql> update madhu set city='bng' where sid>22;
+Query OK, 3 rows affected (0.03 sec)
+Rows matched: 3  Changed: 3  Warnings: 0
+
+mysql> update madhu set city='hyd' where sid=22;
+Query OK, 1 row affected (0.03 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from madhu;
++-----+-------+-------+------------+------+
+| sid | sname | marks | doj        | city |
++-----+-------+-------+------------+------+
+|  21 | ram   |   530 | 2023-07-12 | NULL |
+|  22 | mani  |   590 | 2023-07-02 | hyd  |
+|  23 | nani  |   560 | 2023-03-23 | bng  |
+|  24 | sam   |   580 | 2022-04-23 | bng  |
+|  25 | sanju |   520 | 2023-02-03 | bng  |
++-----+-------+-------+------------+------+
+5 rows in set (0.00 sec)
+
+mysql> update madhu set city='hyd' where sid=21;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update madhu set city='elr'where sid=23;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from madhu;
++-----+-------+-------+------------+------+
+| sid | sname | marks | doj        | city |
++-----+-------+-------+------------+------+
+|  21 | ram   |   530 | 2023-07-12 | hyd  |
+|  22 | mani  |   590 | 2023-07-02 | hyd  |
+|  23 | nani  |   560 | 2023-03-23 | elr  |
+|  24 | sam   |   580 | 2022-04-23 | bng  |
+|  25 | sanju |   520 | 2023-02-03 | bng  |
++-----+-------+-------+------------+------+
+5 rows in set (0.00 sec)
+
+mysql> select sname,sum(marks) group by city;
+ERROR 1054 (42S22): Unknown column 'sname' in 'field list'
+mysql> select sname,sum(marks) from madhu group by city;
++-------+------------+
+| sname | sum(marks) |
++-------+------------+
+| ram   |       1120 |
+| nani  |        560 |
+| sam   |       1100 |
++-------+------------+
+3 rows in set (0.01 sec)
+
+mysql> select city,sum(marks) from madhu group by city;
++------+------------+
+| city | sum(marks) |
++------+------------+
+| hyd  |       1120 |
+| elr  |        560 |
+| bng  |       1100 |
++------+------------+
+3 rows in set (0.00 sec)
+
+mysql> select city,sum(marks) from madhu group by city having eid>23 order by city;
+ERROR 1054 (42S22): Unknown column 'eid' in 'having clause'
+mysql> select city,sum(marks) from madhu group by city having sid>23 order by city;
+ERROR 1054 (42S22): Unknown column 'sid' in 'having clause'
+mysql> select city,sum(marks) from madhu group by city having sid>23;
+ERROR 1054 (42S22): Unknown column 'sid' in 'having clause'
+mysql> select city,sum(marks) from madhu group by city having sid=23;
+ERROR 1054 (42S22): Unknown column 'sid' in 'having clause'
+mysql> select city,sum(marks) from madhu group by city order by city;
++------+------------+
+| city | sum(marks) |
++------+------------+
+| bng  |       1100 |
+| elr  |        560 |
+| hyd  |       1120 |
++------+------------+
+3 rows in set (0.00 sec)
+
+mysql> select * from raju;
+Empty set (0.00 sec)
+
+mysql> desc raju;
++--------+---------------+------+-----+---------+-------+
+| Field  | Type          | Null | Key | Default | Extra |
++--------+---------------+------+-----+---------+-------+
+| ename  | varchar(45)   | YES  |     | NULL    |       |
+| salary | decimal(10,0) | YES  |     | NULL    |       |
+| doj    | date          | YES  |     | NULL    |       |
+| eid    | int           | YES  |     | NULL    |       |
++--------+---------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> drop column eid from raju;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'column eid from raju' at line 1
+mysql> delete column coulmn="eid" from raju;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'column coulmn="eid" from raju' at line 1
+mysql> delete column coulmn="eid" from raju;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'column coulmn="eid" from raju' at line 1
+mysql> ^C
+mysql> \c
+mysql> CREATE TABLE Books
+    -> (
+    -> Id INT PRIMARY KEY IDENTITY(1,1),
+    -> Name VARCHAR (50) NOT NULL,
+    -> Price INT,
+    -> CategoryId INT,
+    -> AuthorId INT
+    -> )
+    -> \c
+mysql> CREATE TABLE Books
+    -> (
+    -> Id INT PRIMARY KEY IDENTITY(1,1),
+    -> Name VARCHAR (50) NOT NULL,
+    -> Price INT,
+    -> CategoryId INT,
+    -> AuthorId INT
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'IDENTITY(1,1),
+Name VARCHAR (50) NOT NULL,
+Price INT,
+CategoryId INT,
+AuthorId ' at line 3
+mysql> CREATE TABLE Books
+    -> (
+    -> Id INT PRIMARY KEY IDENTITY(1,1),
+    -> Name VARCHAR (50) NOT NULL,
+    -> Price INT,
+    -> CategoryId INT,
+    -> AuthorId INT
+    -> Id INT PRIMARY KEY IDENTITY(1,1),\
+    -> \c
+mysql> CREATE TABLE Books
+    -> (
+    -> Id INT PRIMARY KEY IDENTITY(1,1),
+    -> Name VARCHAR (50) NOT NULL,
+    -> Price INT,
+    -> CategoryId INT,
+    -> AuthorId INT
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'IDENTITY(1,1),
+Name VARCHAR (50) NOT NULL,
+Price INT,
+CategoryId INT,
+AuthorId ' at line 3
+mysql> use employee_db;
+Database changed
+mysql> select * from employee;
++-----+--------+--------+------+-----------+------------+------+------+
+| eid | ename  | salary | comm | job       | doj        | mid  | dno  |
++-----+--------+--------+------+-----------+------------+------+------+
+| 101 | king   |  50000 | NULL | president | 2020-10-21 | NULL |   30 |
+| 102 | sam    |  35000 | NULL | manager   | 2020-12-21 |  101 |   10 |
+| 103 | ford   |  32000 | NULL | manager   | 2020-11-01 |  101 |   20 |
+| 104 | tom    |  28000 |  900 | developer | 2021-06-29 |  102 |   10 |
+| 105 | adam   |  27000 | 1000 | developer | 2021-09-23 |  102 |   10 |
+| 106 | jerry  |  25000 | 3000 | tester    | 2021-05-15 |  103 |   20 |
+| 107 | scott  |  24000 | 3000 | tester    | 2021-05-15 |  103 |   20 |
+| 108 | raju   |  12000 |  500 | clerk     | 2023-10-19 |  101 |   40 |
+| 109 | javeed |  29000 | NULL | NULL      | NULL       | NULL | NULL |
++-----+--------+--------+------+-----------+------------+------+------+
+9 rows in set (0.00 sec)
+
+mysql> select * from dept;
++-----+-------------+-----------+
+| dno | dname       | location  |
++-----+-------------+-----------+
+|  10 | development | banglore  |
+|  20 | testing     | chennai   |
+|  30 | operation   | mumbai    |
+|  40 | marketing   | hyderabad |
+|  50 | sales       | pune      |
++-----+-------------+-----------+
+5 rows in set (0.00 sec)
+
+mysql> select eid,ename,salary,d.dno,dname,location from employee e,dept d where e.dno=d.dno;
++-----+-------+--------+-----+-------------+-----------+
+| eid | ename | salary | dno | dname       | location  |
++-----+-------+--------+-----+-------------+-----------+
+| 101 | king  |  50000 |  30 | operation   | mumbai    |
+| 102 | sam   |  35000 |  10 | development | banglore  |
+| 103 | ford  |  32000 |  20 | testing     | chennai   |
+| 104 | tom   |  28000 |  10 | development | banglore  |
+| 105 | adam  |  27000 |  10 | development | banglore  |
+| 106 | jerry |  25000 |  20 | testing     | chennai   |
+| 107 | scott |  24000 |  20 | testing     | chennai   |
+| 108 | raju  |  12000 |  40 | marketing   | hyderabad |
++-----+-------+--------+-----+-------------+-----------+
+8 rows in set (0.00 sec)
+
+mysql> select eid,ename,salary,d.dno,dname,location from employee e,dept d where e.dno!=d.dno;
++-----+-------+--------+-----+-------------+-----------+
+| eid | ename | salary | dno | dname       | location  |
++-----+-------+--------+-----+-------------+-----------+
+| 101 | king  |  50000 |  50 | sales       | pune      |
+| 101 | king  |  50000 |  40 | marketing   | hyderabad |
+| 101 | king  |  50000 |  20 | testing     | chennai   |
+| 101 | king  |  50000 |  10 | development | banglore  |
+| 102 | sam   |  35000 |  50 | sales       | pune      |
+| 102 | sam   |  35000 |  40 | marketing   | hyderabad |
+| 102 | sam   |  35000 |  30 | operation   | mumbai    |
+| 102 | sam   |  35000 |  20 | testing     | chennai   |
+| 103 | ford  |  32000 |  50 | sales       | pune      |
+| 103 | ford  |  32000 |  40 | marketing   | hyderabad |
+| 103 | ford  |  32000 |  30 | operation   | mumbai    |
+| 103 | ford  |  32000 |  10 | development | banglore  |
+| 104 | tom   |  28000 |  50 | sales       | pune      |
+| 104 | tom   |  28000 |  40 | marketing   | hyderabad |
+| 104 | tom   |  28000 |  30 | operation   | mumbai    |
+| 104 | tom   |  28000 |  20 | testing     | chennai   |
+| 105 | adam  |  27000 |  50 | sales       | pune      |
+| 105 | adam  |  27000 |  40 | marketing   | hyderabad |
+| 105 | adam  |  27000 |  30 | operation   | mumbai    |
+| 105 | adam  |  27000 |  20 | testing     | chennai   |
+| 106 | jerry |  25000 |  50 | sales       | pune      |
+| 106 | jerry |  25000 |  40 | marketing   | hyderabad |
+| 106 | jerry |  25000 |  30 | operation   | mumbai    |
+| 106 | jerry |  25000 |  10 | development | banglore  |
+| 107 | scott |  24000 |  50 | sales       | pune      |
+| 107 | scott |  24000 |  40 | marketing   | hyderabad |
+| 107 | scott |  24000 |  30 | operation   | mumbai    |
+| 107 | scott |  24000 |  10 | development | banglore  |
+| 108 | raju  |  12000 |  50 | sales       | pune      |
+| 108 | raju  |  12000 |  30 | operation   | mumbai    |
+| 108 | raju  |  12000 |  20 | testing     | chennai   |
+| 108 | raju  |  12000 |  10 | development | banglore  |
++-----+-------+--------+-----+-------------+-----------+
+32 rows in set (0.00 sec)
+
+mysql> select eid,ename,salary,d.dno,dname,location from employee e cross join dept d where e.dno=d.dno;
++-----+-------+--------+-----+-------------+-----------+
+| eid | ename | salary | dno | dname       | location  |
++-----+-------+--------+-----+-------------+-----------+
+| 101 | king  |  50000 |  30 | operation   | mumbai    |
+| 102 | sam   |  35000 |  10 | development | banglore  |
+| 103 | ford  |  32000 |  20 | testing     | chennai   |
+| 104 | tom   |  28000 |  10 | development | banglore  |
+| 105 | adam  |  27000 |  10 | development | banglore  |
+| 106 | jerry |  25000 |  20 | testing     | chennai   |
+| 107 | scott |  24000 |  20 | testing     | chennai   |
+| 108 | raju  |  12000 |  40 | marketing   | hyderabad |
++-----+-------+--------+-----+-------------+-----------+
+8 rows in set (0.00 sec)
+
+mysql> select eid,ename,salary,d.dno,dname,location from employee e natural join dept d;
++-----+-------+--------+-----+-------------+-----------+
+| eid | ename | salary | dno | dname       | location  |
++-----+-------+--------+-----+-------------+-----------+
+| 101 | king  |  50000 |  30 | operation   | mumbai    |
+| 102 | sam   |  35000 |  10 | development | banglore  |
+| 103 | ford  |  32000 |  20 | testing     | chennai   |
+| 104 | tom   |  28000 |  10 | development | banglore  |
+| 105 | adam  |  27000 |  10 | development | banglore  |
+| 106 | jerry |  25000 |  20 | testing     | chennai   |
+| 107 | scott |  24000 |  20 | testing     | chennai   |
+| 108 | raju  |  12000 |  40 | marketing   | hyderabad |
++-----+-------+--------+-----+-------------+-----------+
+8 rows in set (0.00 sec)
+
+mysql> select eid,ename,salary,job,d.dno,dname,location from employee e left outer join dept d on e.dno=d.dno;
++-----+--------+--------+-----------+------+-------------+-----------+
+| eid | ename  | salary | job       | dno  | dname       | location  |
++-----+--------+--------+-----------+------+-------------+-----------+
+| 101 | king   |  50000 | president |   30 | operation   | mumbai    |
+| 102 | sam    |  35000 | manager   |   10 | development | banglore  |
+| 103 | ford   |  32000 | manager   |   20 | testing     | chennai   |
+| 104 | tom    |  28000 | developer |   10 | development | banglore  |
+| 105 | adam   |  27000 | developer |   10 | development | banglore  |
+| 106 | jerry  |  25000 | tester    |   20 | testing     | chennai   |
+| 107 | scott  |  24000 | tester    |   20 | testing     | chennai   |
+| 108 | raju   |  12000 | clerk     |   40 | marketing   | hyderabad |
+| 109 | javeed |  29000 | NULL      | NULL | NULL        | NULL      |
++-----+--------+--------+-----------+------+-------------+-----------+
+9 rows in set (0.00 sec)
+
+mysql> select d.dno,d,dname,eid,ename from employee e,dept d right outer join on d.dno=e.dno;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'on d.dno=e.dno' at line 1
+mysql> select d.dno,d.dname,eid,ename from employee e,dept d right outer join on d.dno=e.dno;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'on d.dno=e.dno' at line 1
+mysql> select d.dno,d.dname,eid,ename from employee e right outer join dept d on d.dno=e.dno;
++-----+-------------+------+-------+
+| dno | dname       | eid  | ename |
++-----+-------------+------+-------+
+|  10 | development |  105 | adam  |
+|  10 | development |  104 | tom   |
+|  10 | development |  102 | sam   |
+|  20 | testing     |  107 | scott |
+|  20 | testing     |  106 | jerry |
+|  20 | testing     |  103 | ford  |
+|  30 | operation   |  101 | king  |
+|  40 | marketing   |  108 | raju  |
+|  50 | sales       | NULL | NULL  |
++-----+-------------+------+-------+
+9 rows in set (0.00 sec)
+
+mysql> use madhuri;
+Database changed
+mysql> select * from madhu;
++-----+-------+-------+------------+------+
+| sid | sname | marks | doj        | city |
++-----+-------+-------+------------+------+
+|  21 | ram   |   530 | 2023-07-12 | hyd  |
+|  22 | mani  |   590 | 2023-07-02 | hyd  |
+|  23 | nani  |   560 | 2023-03-23 | elr  |
+|  24 | sam   |   580 | 2022-04-23 | bng  |
+|  25 | sanju |   520 | 2023-02-03 | bng  |
++-----+-------+-------+------------+------+
+5 rows in set (0.00 sec)
+
+mysql> select m.sid,m.sname,s.marks,s.city from madhu m selfjoin madhu s where m.sid=s.mid;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'selfjoin madhu s where m.sid=s.mid' at line 1
+mysql> select m.sid,m.sname,s.marks,s.city from madhu m self join madhu s where m.sid=s.mid;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'self join madhu s where m.sid=s.mid' at line 1
+mysql> select m.sid,m.sname,s.marks,s.city from madhu m ,madhu s where m.sid=s.mid;
+ERROR 1054 (42S22): Unknown column 's.mid' in 'where clause'
+mysql> select m.sid,m.sname,s.marks,s.city from madhu m ,madhu s where m.sid=s.sid;
++-----+-------+-------+------+
+| sid | sname | marks | city |
++-----+-------+-------+------+
+|  21 | ram   |   530 | hyd  |
+|  22 | mani  |   590 | hyd  |
+|  23 | nani  |   560 | elr  |
+|  24 | sam   |   580 | bng  |
+|  25 | sanju |   520 | bng  |
++-----+-------+-------+------+
+5 rows in set (0.00 sec)
+
+mysql> select city from madhu where city='elr';
++------+
+| city |
++------+
+| elr  |
++------+
+1 row in set (0.00 sec)
+
+mysql> select marks from madhu where city='elr';
++-------+
+| marks |
++-------+
+|   560 |
++-------+
+1 row in set (0.00 sec)
+
+mysql> select sid where marks>(select marks from madhu where city='elr');
+ERROR 1054 (42S22): Unknown column 'sid' in 'field list'
+mysql> select sid from madhu where marks>(select marks from madhu where city='elr');
++-----+
+| sid |
++-----+
+|  22 |
+|  24 |
++-----+
+2 rows in set (0.00 sec)
+
+mysql> select sid,marks from madhu where marks>(select marks from madhu where city IN('elr','hyd');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> select sid,marks from  where marks>(select marks from madhu where city IN('elr','hyd')madhu;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where marks>(select marks from madhu where city IN('elr','hyd')madhu' at line 1
+mysql> select sid,marks from  where marks>(select marks from madhu where city IN('elr','hyd'))madhu;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where marks>(select marks from madhu where city IN('elr','hyd'))madhu' at line 1
+mysql> select sid,marks from madhu where marks>(select marks from madhu where city IN('elr','hyd'));
+ERROR 1242 (21000): Subquery returns more than 1 row
+mysql>
+mysql> select sid,marks from madhu where mark=(select marks from madhu where city IN('elr','hyd'));
+ERROR 1054 (42S22): Unknown column 'mark' in 'where clause'
+mysql> select sid,marks from madhu where mark like (select marks from madhu where city IN('elr','hyd'));
+ERROR 1054 (42S22): Unknown column 'mark' in 'where clause'
+mysql> select sid from madhu where marks>(select marks from madhu where city='elr');
++-----+
+| sid |
++-----+
+|  22 |
+|  24 |
++-----+
+2 rows in set (0.00 sec)
+
+mysql> create view madhu_info as select * from madhu;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> desc madhu_info;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| sid   | int         | NO   |     | NULL    |       |
+| sname | varchar(50) | YES  |     | NULL    |       |
+| marks | int         | YES  |     | NULL    |       |
+| doj   | date        | YES  |     | NULL    |       |
+| city  | varchar(45) | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+5 rows in set (0.00 sec)
+
+mysql>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+mysql> use madhuri
+Database changed
+mysql> show tables;
+Empty set (0.00 sec)
+
+mysql> use madhuri;
+Database changed
+mysql> show tables;
++-------------------+
+| Tables_in_madhuri |
++-------------------+
+| madhu             |
+| raju              |
++-------------------+
+2 rows in set (0.00 sec)
+
+mysql> desc madhu
+    -> \c
+mysql> desc madhu;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| sid   | int         | NO   | PRI | NULL    |       |
+| sname | varchar(45) | YES  |     | NULL    |       |
+| marks | int         | YES  |     | NULL    |       |
+| doj   | date        | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> desc raju;
++--------+---------------+------+-----+---------+-------+
+| Field  | Type          | Null | Key | Default | Extra |
++--------+---------------+------+-----+---------+-------+
+| eid    | int           | NO   | PRI | NULL    |       |
+| ename  | varchar(45)   | YES  |     | NULL    |       |
+| salary | decimal(10,0) | YES  |     | NULL    |       |
+| doj    | date          | YES  |     | NULL    |       |
++--------+---------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> insert into madhu values(21,'ram',530,'2023-07-12');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> desc madhu;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| sid   | int         | NO   | PRI | NULL    |       |
+| sname | varchar(45) | YES  |     | NULL    |       |
+| marks | int         | YES  |     | NULL    |       |
+| doj   | date        | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> select * from madhu;
++-----+-------+-------+------------+
+| sid | sname | marks | doj        |
++-----+-------+-------+------------+
+|  21 | ram   |   530 | 2023-07-12 |
++-----+-------+-------+------------+
+1 row in set (0.00 sec)
+
+mysql> insert into madhu values(22,'mani',530,'2023-87-52');
+ERROR 1292 (22007): Incorrect date value: '2023-87-52' for column 'doj' at row 1
+mysql> insert into madhu values(22,'mani',530,'2023-07-2');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into madhu values(23,'nani',560,'2023-03-23');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into madhu values(24,'sam',580,'2022-04-23');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into madhu values(25,'sanju',520,'2023-02-3');
+Query OK, 1 row affected (0.03 sec)
+
+mysql> select * from madhu;
++-----+-------+-------+------------+
+| sid | sname | marks | doj        |
++-----+-------+-------+------------+
+|  21 | ram   |   530 | 2023-07-12 |
+|  22 | mani  |   530 | 2023-07-02 |
+|  23 | nani  |   560 | 2023-03-23 |
+|  24 | sam   |   580 | 2022-04-23 |
+|  25 | sanju |   520 | 2023-02-03 |
++-----+-------+-------+------------+
+5 rows in set (0.00 sec)
+
+mysql> desc raju;
++--------+---------------+------+-----+---------+-------+
+| Field  | Type          | Null | Key | Default | Extra |
++--------+---------------+------+-----+---------+-------+
+| eid    | int           | NO   | PRI | NULL    |       |
+| ename  | varchar(45)   | YES  |     | NULL    |       |
+| salary | decimal(10,0) | YES  |     | NULL    |       |
+| doj    | date          | YES  |     | NULL    |       |
++--------+---------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> alter table madhu modify ename varchar(50);
+ERROR 1054 (42S22): Unknown column 'ename' in 'madhu'
+mysql> alter table madhu modify sname varchar(50);
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> desc madhu;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| sid   | int         | NO   | PRI | NULL    |       |
+| sname | varchar(50) | YES  |     | NULL    |       |
+| marks | int         | YES  |     | NULL    |       |
+| doj   | date        | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> alter table madhu modify add(city(varchar(45));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'add(city(varchar(45))' at line 1
+mysql> alter table madhu  add(city(varchar(45));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '(varchar(45))' at line 1
+mysql> alter table madhu  add(city Varchar(45));
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table raju column eid;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'column eid' at line 1
+mysql> alter table raju  drop column eid;
+Query OK, 0 rows affected (0.04 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> alter table raju  add(eid int);
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> update madhu set sid=22 where marks=590;
+Query OK, 0 rows affected (0.00 sec)
+Rows matched: 0  Changed: 0  Warnings: 0
+
+mysql> select * from madhu;
++-----+-------+-------+------------+------+
+| sid | sname | marks | doj        | city |
++-----+-------+-------+------------+------+
+|  21 | ram   |   530 | 2023-07-12 | NULL |
+|  22 | mani  |   530 | 2023-07-02 | NULL |
+|  23 | nani  |   560 | 2023-03-23 | NULL |
+|  24 | sam   |   580 | 2022-04-23 | NULL |
+|  25 | sanju |   520 | 2023-02-03 | NULL |
++-----+-------+-------+------------+------+
+5 rows in set (0.00 sec)
+
+mysql> update madhu set marks=590  where sid=22;
+Query OK, 1 row affected (0.03 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from madhu;
++-----+-------+-------+------------+------+
+| sid | sname | marks | doj        | city |
++-----+-------+-------+------------+------+
+|  21 | ram   |   530 | 2023-07-12 | NULL |
+|  22 | mani  |   590 | 2023-07-02 | NULL |
+|  23 | nani  |   560 | 2023-03-23 | NULL |
+|  24 | sam   |   580 | 2022-04-23 | NULL |
+|  25 | sanju |   520 | 2023-02-03 | NULL |
++-----+-------+-------+------------+------+
+5 rows in set (0.00 sec)
+
+mysql> select sid,sname from madhu where sid>23;
++-----+-------+
+| sid | sname |
++-----+-------+
+|  24 | sam   |
+|  25 | sanju |
++-----+-------+
+2 rows in set (0.00 sec)
+
+mysql> select * from madhu where marks between 530 and 580;
++-----+-------+-------+------------+------+
+| sid | sname | marks | doj        | city |
++-----+-------+-------+------------+------+
+|  21 | ram   |   530 | 2023-07-12 | NULL |
+|  23 | nani  |   560 | 2023-03-23 | NULL |
+|  24 | sam   |   580 | 2022-04-23 | NULL |
++-----+-------+-------+------------+------+
+3 rows in set (0.00 sec)
+
+mysql> select * from madhu where sname like 's%';
++-----+-------+-------+------------+------+
+| sid | sname | marks | doj        | city |
++-----+-------+-------+------------+------+
+|  24 | sam   |   580 | 2022-04-23 | NULL |
+|  25 | sanju |   520 | 2023-02-03 | NULL |
++-----+-------+-------+------------+------+
+2 rows in set (0.00 sec)
+
+mysql> select * from madhu where sname like '%m';
++-----+-------+-------+------------+------+
+| sid | sname | marks | doj        | city |
++-----+-------+-------+------------+------+
+|  21 | ram   |   530 | 2023-07-12 | NULL |
+|  24 | sam   |   580 | 2022-04-23 | NULL |
++-----+-------+-------+------------+------+
+2 rows in set (0.00 sec)
+
+mysql> select sum(marks) from madhu;
++------------+
+| sum(marks) |
++------------+
+|       2780 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select max(marks) from madhu;
++------------+
+| max(marks) |
++------------+
+|        590 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select min(marks) from madhu;
++------------+
+| min(marks) |
++------------+
+|        520 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> select min(doj) from madhu;
++------------+
+| min(doj)   |
++------------+
+| 2022-04-23 |
++------------+
+1 row in set (0.00 sec)
+
+mysql> update madhu set city='hyd' where sid>23;
+Query OK, 2 rows affected (0.01 sec)
+Rows matched: 2  Changed: 2  Warnings: 0
+
+mysql> select * from madhu;
++-----+-------+-------+------------+------+
+| sid | sname | marks | doj        | city |
++-----+-------+-------+------------+------+
+|  21 | ram   |   530 | 2023-07-12 | NULL |
+|  22 | mani  |   590 | 2023-07-02 | NULL |
+|  23 | nani  |   560 | 2023-03-23 | NULL |
+|  24 | sam   |   580 | 2022-04-23 | hyd  |
+|  25 | sanju |   520 | 2023-02-03 | hyd  |
++-----+-------+-------+------------+------+
+5 rows in set (0.00 sec)
+
+mysql> update madhu set city='bng' where sid>22;
+Query OK, 3 rows affected (0.03 sec)
+Rows matched: 3  Changed: 3  Warnings: 0
+
+mysql> update madhu set city='hyd' where sid=22;
+Query OK, 1 row affected (0.03 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from madhu;
++-----+-------+-------+------------+------+
+| sid | sname | marks | doj        | city |
++-----+-------+-------+------------+------+
+|  21 | ram   |   530 | 2023-07-12 | NULL |
+|  22 | mani  |   590 | 2023-07-02 | hyd  |
+|  23 | nani  |   560 | 2023-03-23 | bng  |
+|  24 | sam   |   580 | 2022-04-23 | bng  |
+|  25 | sanju |   520 | 2023-02-03 | bng  |
++-----+-------+-------+------------+------+
+5 rows in set (0.00 sec)
+
+mysql> update madhu set city='hyd' where sid=21;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update madhu set city='elr'where sid=23;
+Query OK, 1 row affected (0.01 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from madhu;
++-----+-------+-------+------------+------+
+| sid | sname | marks | doj        | city |
++-----+-------+-------+------------+------+
+|  21 | ram   |   530 | 2023-07-12 | hyd  |
+|  22 | mani  |   590 | 2023-07-02 | hyd  |
+|  23 | nani  |   560 | 2023-03-23 | elr  |
+|  24 | sam   |   580 | 2022-04-23 | bng  |
+|  25 | sanju |   520 | 2023-02-03 | bng  |
++-----+-------+-------+------------+------+
+5 rows in set (0.00 sec)
+
+mysql> select sname,sum(marks) group by city;
+ERROR 1054 (42S22): Unknown column 'sname' in 'field list'
+mysql> select sname,sum(marks) from madhu group by city;
++-------+------------+
+| sname | sum(marks) |
++-------+------------+
+| ram   |       1120 |
+| nani  |        560 |
+| sam   |       1100 |
++-------+------------+
+3 rows in set (0.01 sec)
+
+mysql> select city,sum(marks) from madhu group by city;
++------+------------+
+| city | sum(marks) |
++------+------------+
+| hyd  |       1120 |
+| elr  |        560 |
+| bng  |       1100 |
++------+------------+
+3 rows in set (0.00 sec)
+
+mysql> select city,sum(marks) from madhu group by city having eid>23 order by city;
+ERROR 1054 (42S22): Unknown column 'eid' in 'having clause'
+mysql> select city,sum(marks) from madhu group by city having sid>23 order by city;
+ERROR 1054 (42S22): Unknown column 'sid' in 'having clause'
+mysql> select city,sum(marks) from madhu group by city having sid>23;
+ERROR 1054 (42S22): Unknown column 'sid' in 'having clause'
+mysql> select city,sum(marks) from madhu group by city having sid=23;
+ERROR 1054 (42S22): Unknown column 'sid' in 'having clause'
+mysql> select city,sum(marks) from madhu group by city order by city;
++------+------------+
+| city | sum(marks) |
++------+------------+
+| bng  |       1100 |
+| elr  |        560 |
+| hyd  |       1120 |
++------+------------+
+3 rows in set (0.00 sec)
+
+mysql> select * from raju;
+Empty set (0.00 sec)
+
+mysql> desc raju;
++--------+---------------+------+-----+---------+-------+
+| Field  | Type          | Null | Key | Default | Extra |
++--------+---------------+------+-----+---------+-------+
+| ename  | varchar(45)   | YES  |     | NULL    |       |
+| salary | decimal(10,0) | YES  |     | NULL    |       |
+| doj    | date          | YES  |     | NULL    |       |
+| eid    | int           | YES  |     | NULL    |       |
++--------+---------------+------+-----+---------+-------+
+4 rows in set (0.00 sec)
+
+mysql> drop column eid from raju;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'column eid from raju' at line 1
+mysql> delete column coulmn="eid" from raju;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'column coulmn="eid" from raju' at line 1
+mysql> delete column coulmn="eid" from raju;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'column coulmn="eid" from raju' at line 1
+mysql> ^C
+mysql> \c
+mysql> CREATE TABLE Books
+    -> (
+    -> Id INT PRIMARY KEY IDENTITY(1,1),
+    -> Name VARCHAR (50) NOT NULL,
+    -> Price INT,
+    -> CategoryId INT,
+    -> AuthorId INT
+    -> )
+    -> \c
+mysql> CREATE TABLE Books
+    -> (
+    -> Id INT PRIMARY KEY IDENTITY(1,1),
+    -> Name VARCHAR (50) NOT NULL,
+    -> Price INT,
+    -> CategoryId INT,
+    -> AuthorId INT
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'IDENTITY(1,1),
+Name VARCHAR (50) NOT NULL,
+Price INT,
+CategoryId INT,
+AuthorId ' at line 3
+mysql> CREATE TABLE Books
+    -> (
+    -> Id INT PRIMARY KEY IDENTITY(1,1),
+    -> Name VARCHAR (50) NOT NULL,
+    -> Price INT,
+    -> CategoryId INT,
+    -> AuthorId INT
+    -> Id INT PRIMARY KEY IDENTITY(1,1),\
+    -> \c
+mysql> CREATE TABLE Books
+    -> (
+    -> Id INT PRIMARY KEY IDENTITY(1,1),
+    -> Name VARCHAR (50) NOT NULL,
+    -> Price INT,
+    -> CategoryId INT,
+    -> AuthorId INT
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'IDENTITY(1,1),
+Name VARCHAR (50) NOT NULL,
+Price INT,
+CategoryId INT,
+AuthorId ' at line 3
+mysql> use employee_db;
+Database changed
+mysql> select * from employee;
++-----+--------+--------+------+-----------+------------+------+------+
+| eid | ename  | salary | comm | job       | doj        | mid  | dno  |
++-----+--------+--------+------+-----------+------------+------+------+
+| 101 | king   |  50000 | NULL | president | 2020-10-21 | NULL |   30 |
+| 102 | sam    |  35000 | NULL | manager   | 2020-12-21 |  101 |   10 |
+| 103 | ford   |  32000 | NULL | manager   | 2020-11-01 |  101 |   20 |
+| 104 | tom    |  28000 |  900 | developer | 2021-06-29 |  102 |   10 |
+| 105 | adam   |  27000 | 1000 | developer | 2021-09-23 |  102 |   10 |
+| 106 | jerry  |  25000 | 3000 | tester    | 2021-05-15 |  103 |   20 |
+| 107 | scott  |  24000 | 3000 | tester    | 2021-05-15 |  103 |   20 |
+| 108 | raju   |  12000 |  500 | clerk     | 2023-10-19 |  101 |   40 |
+| 109 | javeed |  29000 | NULL | NULL      | NULL       | NULL | NULL |
++-----+--------+--------+------+-----------+------------+------+------+
+9 rows in set (0.00 sec)
+
+mysql> select * from dept;
++-----+-------------+-----------+
+| dno | dname       | location  |
++-----+-------------+-----------+
+|  10 | development | banglore  |
+|  20 | testing     | chennai   |
+|  30 | operation   | mumbai    |
+|  40 | marketing   | hyderabad |
+|  50 | sales       | pune      |
++-----+-------------+-----------+
+5 rows in set (0.00 sec)
+
+mysql> select eid,ename,salary,d.dno,dname,location from employee e,dept d where e.dno=d.dno;
++-----+-------+--------+-----+-------------+-----------+
+| eid | ename | salary | dno | dname       | location  |
++-----+-------+--------+-----+-------------+-----------+
+| 101 | king  |  50000 |  30 | operation   | mumbai    |
+| 102 | sam   |  35000 |  10 | development | banglore  |
+| 103 | ford  |  32000 |  20 | testing     | chennai   |
+| 104 | tom   |  28000 |  10 | development | banglore  |
+| 105 | adam  |  27000 |  10 | development | banglore  |
+| 106 | jerry |  25000 |  20 | testing     | chennai   |
+| 107 | scott |  24000 |  20 | testing     | chennai   |
+| 108 | raju  |  12000 |  40 | marketing   | hyderabad |
++-----+-------+--------+-----+-------------+-----------+
+8 rows in set (0.00 sec)
+
+mysql> select eid,ename,salary,d.dno,dname,location from employee e,dept d where e.dno!=d.dno;
++-----+-------+--------+-----+-------------+-----------+
+| eid | ename | salary | dno | dname       | location  |
++-----+-------+--------+-----+-------------+-----------+
+| 101 | king  |  50000 |  50 | sales       | pune      |
+| 101 | king  |  50000 |  40 | marketing   | hyderabad |
+| 101 | king  |  50000 |  20 | testing     | chennai   |
+| 101 | king  |  50000 |  10 | development | banglore  |
+| 102 | sam   |  35000 |  50 | sales       | pune      |
+| 102 | sam   |  35000 |  40 | marketing   | hyderabad |
+| 102 | sam   |  35000 |  30 | operation   | mumbai    |
+| 102 | sam   |  35000 |  20 | testing     | chennai   |
+| 103 | ford  |  32000 |  50 | sales       | pune      |
+| 103 | ford  |  32000 |  40 | marketing   | hyderabad |
+| 103 | ford  |  32000 |  30 | operation   | mumbai    |
+| 103 | ford  |  32000 |  10 | development | banglore  |
+| 104 | tom   |  28000 |  50 | sales       | pune      |
+| 104 | tom   |  28000 |  40 | marketing   | hyderabad |
+| 104 | tom   |  28000 |  30 | operation   | mumbai    |
+| 104 | tom   |  28000 |  20 | testing     | chennai   |
+| 105 | adam  |  27000 |  50 | sales       | pune      |
+| 105 | adam  |  27000 |  40 | marketing   | hyderabad |
+| 105 | adam  |  27000 |  30 | operation   | mumbai    |
+| 105 | adam  |  27000 |  20 | testing     | chennai   |
+| 106 | jerry |  25000 |  50 | sales       | pune      |
+| 106 | jerry |  25000 |  40 | marketing   | hyderabad |
+| 106 | jerry |  25000 |  30 | operation   | mumbai    |
+| 106 | jerry |  25000 |  10 | development | banglore  |
+| 107 | scott |  24000 |  50 | sales       | pune      |
+| 107 | scott |  24000 |  40 | marketing   | hyderabad |
+| 107 | scott |  24000 |  30 | operation   | mumbai    |
+| 107 | scott |  24000 |  10 | development | banglore  |
+| 108 | raju  |  12000 |  50 | sales       | pune      |
+| 108 | raju  |  12000 |  30 | operation   | mumbai    |
+| 108 | raju  |  12000 |  20 | testing     | chennai   |
+| 108 | raju  |  12000 |  10 | development | banglore  |
++-----+-------+--------+-----+-------------+-----------+
+32 rows in set (0.00 sec)
+
+mysql> select eid,ename,salary,d.dno,dname,location from employee e cross join dept d where e.dno=d.dno;
++-----+-------+--------+-----+-------------+-----------+
+| eid | ename | salary | dno | dname       | location  |
++-----+-------+--------+-----+-------------+-----------+
+| 101 | king  |  50000 |  30 | operation   | mumbai    |
+| 102 | sam   |  35000 |  10 | development | banglore  |
+| 103 | ford  |  32000 |  20 | testing     | chennai   |
+| 104 | tom   |  28000 |  10 | development | banglore  |
+| 105 | adam  |  27000 |  10 | development | banglore  |
+| 106 | jerry |  25000 |  20 | testing     | chennai   |
+| 107 | scott |  24000 |  20 | testing     | chennai   |
+| 108 | raju  |  12000 |  40 | marketing   | hyderabad |
++-----+-------+--------+-----+-------------+-----------+
+8 rows in set (0.00 sec)
+
+mysql> select eid,ename,salary,d.dno,dname,location from employee e natural join dept d;
++-----+-------+--------+-----+-------------+-----------+
+| eid | ename | salary | dno | dname       | location  |
++-----+-------+--------+-----+-------------+-----------+
+| 101 | king  |  50000 |  30 | operation   | mumbai    |
+| 102 | sam   |  35000 |  10 | development | banglore  |
+| 103 | ford  |  32000 |  20 | testing     | chennai   |
+| 104 | tom   |  28000 |  10 | development | banglore  |
+| 105 | adam  |  27000 |  10 | development | banglore  |
+| 106 | jerry |  25000 |  20 | testing     | chennai   |
+| 107 | scott |  24000 |  20 | testing     | chennai   |
+| 108 | raju  |  12000 |  40 | marketing   | hyderabad |
++-----+-------+--------+-----+-------------+-----------+
+8 rows in set (0.00 sec)
+
+mysql> select eid,ename,salary,job,d.dno,dname,location from employee e left outer join dept d on e.dno=d.dno;
++-----+--------+--------+-----------+------+-------------+-----------+
+| eid | ename  | salary | job       | dno  | dname       | location  |
++-----+--------+--------+-----------+------+-------------+-----------+
+| 101 | king   |  50000 | president |   30 | operation   | mumbai    |
+| 102 | sam    |  35000 | manager   |   10 | development | banglore  |
+| 103 | ford   |  32000 | manager   |   20 | testing     | chennai   |
+| 104 | tom    |  28000 | developer |   10 | development | banglore  |
+| 105 | adam   |  27000 | developer |   10 | development | banglore  |
+| 106 | jerry  |  25000 | tester    |   20 | testing     | chennai   |
+| 107 | scott  |  24000 | tester    |   20 | testing     | chennai   |
+| 108 | raju   |  12000 | clerk     |   40 | marketing   | hyderabad |
+| 109 | javeed |  29000 | NULL      | NULL | NULL        | NULL      |
++-----+--------+--------+-----------+------+-------------+-----------+
+9 rows in set (0.00 sec)
+
+mysql> select d.dno,d,dname,eid,ename from employee e,dept d right outer join on d.dno=e.dno;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'on d.dno=e.dno' at line 1
+mysql> select d.dno,d.dname,eid,ename from employee e,dept d right outer join on d.dno=e.dno;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'on d.dno=e.dno' at line 1
+mysql> select d.dno,d.dname,eid,ename from employee e right outer join dept d on d.dno=e.dno;
++-----+-------------+------+-------+
+| dno | dname       | eid  | ename |
++-----+-------------+------+-------+
+|  10 | development |  105 | adam  |
+|  10 | development |  104 | tom   |
+|  10 | development |  102 | sam   |
+|  20 | testing     |  107 | scott |
+|  20 | testing     |  106 | jerry |
+|  20 | testing     |  103 | ford  |
+|  30 | operation   |  101 | king  |
+|  40 | marketing   |  108 | raju  |
+|  50 | sales       | NULL | NULL  |
++-----+-------------+------+-------+
+9 rows in set (0.00 sec)
+
+mysql> use madhuri;
+Database changed
+mysql> select * from madhu;
++-----+-------+-------+------------+------+
+| sid | sname | marks | doj        | city |
++-----+-------+-------+------------+------+
+|  21 | ram   |   530 | 2023-07-12 | hyd  |
+|  22 | mani  |   590 | 2023-07-02 | hyd  |
+|  23 | nani  |   560 | 2023-03-23 | elr  |
+|  24 | sam   |   580 | 2022-04-23 | bng  |
+|  25 | sanju |   520 | 2023-02-03 | bng  |
++-----+-------+-------+------------+------+
+5 rows in set (0.00 sec)
+
+mysql> select m.sid,m.sname,s.marks,s.city from madhu m selfjoin madhu s where m.sid=s.mid;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'selfjoin madhu s where m.sid=s.mid' at line 1
+mysql> select m.sid,m.sname,s.marks,s.city from madhu m self join madhu s where m.sid=s.mid;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'self join madhu s where m.sid=s.mid' at line 1
+mysql> select m.sid,m.sname,s.marks,s.city from madhu m ,madhu s where m.sid=s.mid;
+ERROR 1054 (42S22): Unknown column 's.mid' in 'where clause'
+mysql> select m.sid,m.sname,s.marks,s.city from madhu m ,madhu s where m.sid=s.sid;
++-----+-------+-------+------+
+| sid | sname | marks | city |
++-----+-------+-------+------+
+|  21 | ram   |   530 | hyd  |
+|  22 | mani  |   590 | hyd  |
+|  23 | nani  |   560 | elr  |
+|  24 | sam   |   580 | bng  |
+|  25 | sanju |   520 | bng  |
++-----+-------+-------+------+
+5 rows in set (0.00 sec)
+
+mysql> select city from madhu where city='elr';
++------+
+| city |
++------+
+| elr  |
++------+
+1 row in set (0.00 sec)
+
+mysql> select marks from madhu where city='elr';
++-------+
+| marks |
++-------+
+|   560 |
++-------+
+1 row in set (0.00 sec)
+
+mysql> select sid where marks>(select marks from madhu where city='elr');
+ERROR 1054 (42S22): Unknown column 'sid' in 'field list'
+mysql> select sid from madhu where marks>(select marks from madhu where city='elr');
++-----+
+| sid |
++-----+
+|  22 |
+|  24 |
++-----+
+2 rows in set (0.00 sec)
+
+mysql> select sid,marks from madhu where marks>(select marks from madhu where city IN('elr','hyd');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+mysql> select sid,marks from  where marks>(select marks from madhu where city IN('elr','hyd')madhu;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where marks>(select marks from madhu where city IN('elr','hyd')madhu' at line 1
+mysql> select sid,marks from  where marks>(select marks from madhu where city IN('elr','hyd'))madhu;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'where marks>(select marks from madhu where city IN('elr','hyd'))madhu' at line 1
+mysql> select sid,marks from madhu where marks>(select marks from madhu where city IN('elr','hyd'));
+ERROR 1242 (21000): Subquery returns more than 1 row
+mysql>
+mysql> select sid,marks from madhu where mark=(select marks from madhu where city IN('elr','hyd'));
+ERROR 1054 (42S22): Unknown column 'mark' in 'where clause'
+mysql> select sid,marks from madhu where mark like (select marks from madhu where city IN('elr','hyd'));
+ERROR 1054 (42S22): Unknown column 'mark' in 'where clause'
+mysql> select sid from madhu where marks>(select marks from madhu where city='elr');
++-----+
+| sid |
++-----+
+|  22 |
+|  24 |
++-----+
+2 rows in set (0.00 sec)
+
+mysql> create view madhu_info as select * from madhu;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> desc madhu_info;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| sid   | int         | NO   |     | NULL    |       |
+| sname | varchar(50) | YES  |     | NULL    |       |
+| marks | int         | YES  |     | NULL    |       |
+| doj   | date        | YES  |     | NULL    |       |
+| city  | varchar(45) | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+5 rows in set (0.0
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

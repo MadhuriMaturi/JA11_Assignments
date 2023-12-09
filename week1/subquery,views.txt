@@ -1,0 +1,24 @@
+1.Get details for those employees , who are earning more than Tom.
+
+> select * from employee where salary > (select salary  from employee where ename = 'tom');
+
+2. Get employee details , who ar working at Banglore location
+
+ > select * from employee where dno = (select dno from dept where location = 'Banglore');
+
+Sub query in Project
+----------------------:
+ select job, salary , (select sum(salary) from employee) - salary   from employee;
+
+Sub query instead of table name
+--------------------------------
+select  eid,ename,salary,job from  (select eid,ename,salary,job from employee where job IN ('Developer','Tester'))  emp;
+
+
+
+view
+------
+CREATE VIEW Employee_Info AS select * from employee;
+
+CREATE VIEW dept_view AS select dno,dname from dept;
+

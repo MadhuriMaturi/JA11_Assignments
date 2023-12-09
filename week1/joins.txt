@@ -1,0 +1,49 @@
+Equi Join:
+
+select  eid,ename,salary , d.dno , dname ,location  from employee e , dept  d  where e.dno = d.dno;
+
+Non-Equi Join: 
+
+select  eid,ename,salary , d.dno , dname ,location  from employee e , dept  d  where e.dno != d.dno;
+
+Cross Join: 
+
+select  eid,ename,salary , d.dno , dname ,location  from employee e   CROSS JOIN   dept  d  
+ where e.dno = d.dno;
+
+Natural Join:
+mysql> select  eid,ename,salary , dno , dname , location from employee NATURAL JOIN Dept;
+
+
+
+
+Outer Join:
+It is used to join tables  to fetch matching records along with non-matching.
+
+Note: Outer joins used ON clause ,  because where clause not allowed
+
+Left outer Join:
+select eid,ename,job , d.dno , dname from  employee e  left outer join dept  d on e.dno = d.dno;
+
+Right outer join:
+ select   d.dno , dname ,location , eid, ename, job from  employee e   right outer join  dept d ON e.dno = d.dno;
+
+
+Full Outer Join:
+
+ select eid,ename,job , d.dno , dname from  employee e  left outer join dept  d ON e.dno = d.dno
+ -> UNION
+ -> select eid,ename,job , d.dno , dname from  employee e  right outer join dept  d ON e.dno = d.dno;
+
+
+SELF Join:
+-----------
+When we join table by itself.
+
+mysql> Select E.eid,E.ename ,M.eid , M.ename   from employee E , employee M   where E.mid = M.eid;
+
+ Select E.eid,E.ename ,M.eid , M.ename , M.mid   from employee E , employee M   where E.mid = M.eid;
+
+
+
+
